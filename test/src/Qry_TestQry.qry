@@ -4,6 +4,7 @@ Begin InputTables
     Name ="Tasks"
 End
 Begin OutputColumns
+    Expression ="Tasks.*"
 End
 dbBoolean "ReturnsRecords" ="-1"
 dbInteger "ODBCTimeout" ="60"
@@ -18,11 +19,11 @@ Begin
     Left =18
     Top =40
     Right =904
-    Bottom =360
+    Bottom =554
     Left =-1
     Top =-1
-    Right =879
-    Bottom =144
+    Right =875
+    Bottom =193
     Left =0
     Top =0
     ColumnsShown =539
