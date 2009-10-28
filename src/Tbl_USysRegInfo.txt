@@ -1,0 +1,4 @@
+"Subkey","Type","ValName","Value"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",0,,
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Library","|ACCDIR\AccessVCStandalone.mdb"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Expression","=SAExportThisDataBase()"

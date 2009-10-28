@@ -1,0 +1,152 @@
+Version =19
+VersionRequired =19
+Checksum =-14480787
+Begin Report
+    LayoutForPrint = NotDefault
+    AllowDesignChanges = NotDefault
+    DefaultView =0
+    TabularFamily =48
+    DateGrouping =1
+    GrpKeepTogether =1
+    PictureAlignment =2
+    DatasheetGridlinesBehavior =3
+    GridY =10
+    Width =5669
+    DatasheetFontHeight =10
+    ItemSuffix =2
+    Left =270
+    Top =210
+    Right =7725
+    Bottom =6750
+    DatasheetGridlinesColor =12632256
+    RecSrcDt = Begin
+        0x675ba5c49e96e340
+    End
+    GUID = Begin
+        0xe70ca5c01a2d484ebab377804f250ef4
+    End
+    NameMap = Begin
+        0x0acc0e55000000000d39d6f66676c2468601ed3ca30986d000000000c55b36cc ,
+        0x5b92e34000008e00010207005400610073006b00730000000000000086427318 ,
+        0x8f532442b9469796d963dc69070000000d39d6f66676c2468601ed3ca30986d0 ,
+        0x45006e0064004400610074006500000000000000f750dc9395eaf04ebdbe2def ,
+        0x12d57717070000000d39d6f66676c2468601ed3ca30986d05300740061007200 ,
+        0x7400440061007400650000000000000000000000000000000000000000000000 ,
+        0x0c000000030000000000000000000000000000000000
+    End
+    RecordSource ="Tasks"
+    DatasheetFontName ="Arial"
+    PrtMip = Begin
+        0xa2050000a1050000a1050000a10500000000000025160000a506000001000000 ,
+        0x010000006801000000000000a10700000100000001000000
+    End
+    PrtDevMode = Begin
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x010400049c009000032f00000100090000000000640001000100c80001000100 ,
+        0xc800010000004c65747465720000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x000000000000000000000000000000000000000000000000000000007769646d ,
+        0x10000000010000000000000000000000fe0000000100000000000000c8000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x000000000000000000000000
+    End
+    PrtDevNames = Begin
+        0x080036005d000100000000000000000000000000000000000000000000000000 ,
+        0x0000000000000000000000000000000000000000000000000000000000000000 ,
+        0x00000000000000000000000000000000000000000000000000000000004d6963 ,
+        0x726f736f667420446f63756d656e7420496d6167696e67205772697465722050 ,
+        0x6f72743a00
+    End
+    Begin
+        Begin Label
+            BackStyle =0
+            TextFontFamily =2
+            FontName ="Arial"
+        End
+        Begin TextBox
+            FELineBreak = NotDefault
+            OldBorderStyle =0
+            TextFontFamily =2
+            Width =1701
+            LabelX =-1701
+            FontName ="Arial"
+        End
+        Begin PageHeader
+            Height =1134
+            Name ="PageHeaderSection"
+            GUID = Begin
+                0x1acb0bfd0f359845be47377fc051fa6f
+            End
+        End
+        Begin Section
+            KeepTogether = NotDefault
+            Height =1701
+            Name ="Detail"
+            GUID = Begin
+                0x18b17bda109f624392de2838cd75ac2a
+            End
+            Begin
+                Begin TextBox
+                    IMESentenceMode =3
+                    Left =2267
+                    Top =1190
+                    Name ="EndDate"
+                    ControlSource ="EndDate"
+                    Format ="Short Date"
+                    InputMask ="99/99/00;0"
+                    GUID = Begin
+                        0x285a9507284d8041813af820bedc68b2
+                    End
+                    Begin
+                        Begin Label
+                            Left =566
+                            Top =1190
+                            Width =765
+                            Height =225
+                            Name ="Label0"
+                            Caption ="End Date:"
+                            GUID = Begin
+                                0x04283119619109448b645e1ac1f0ce75
+                            End
+                        End
+                    End
+                End
+                Begin TextBox
+                    IMESentenceMode =3
+                    Left =2381
+                    Top =226
+                    TabIndex =1
+                    Name ="StartDate"
+                    ControlSource ="StartDate"
+                    Format ="Short Date"
+                    InputMask ="99/99/00;0"
+                    GUID = Begin
+                        0x2140ce0a42c8f54c90483dbf12704c78
+                    End
+                    Begin
+                        Begin Label
+                            Left =680
+                            Top =226
+                            Width =810
+                            Height =225
+                            Name ="Label1"
+                            Caption ="Start Date:"
+                            GUID = Begin
+                                0x55d4f936a5b5744fba8f14172b698bbc
+                            End
+                        End
+                    End
+                End
+            End
+        End
+        Begin PageFooter
+            Height =1134
+            Name ="PageFooterSection"
+            GUID = Begin
+                0xfa86763bd7c5834f9f57de3268144770
+            End
+        End
+    End
+End
