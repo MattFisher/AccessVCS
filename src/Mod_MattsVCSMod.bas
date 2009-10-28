@@ -178,6 +178,10 @@ Next myDoc
 
 End Sub
 
+Public Sub Test_exportForm()
+Application.SaveAsText acForm, "MattsVCSFrm", _
+        "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\src\Frm_MattsVCSFrm.frm"
+End Sub
 
 'Takes the exportFilename and exports all objects to files in the given exportLocation
 Public Function SAExportDatabaseObjects(exportLocation As String, _
@@ -204,7 +208,7 @@ classCount = 0
 
 processTables = True
 processQueries = True
-processForms = False
+processForms = True
 processModules = True
 processMacros = True
 processReports = True
