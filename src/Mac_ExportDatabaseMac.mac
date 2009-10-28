@@ -1,0 +1,11 @@
+Version =196611
+ColumnsShown =0
+Begin
+    Action ="Hourglass"
+    Argument ="-1"
+End
+Begin
+    Action ="RunCode"
+    Comment ="Export database to c:\\opt\\picket\\trunk\\analyser\\DB_Export"
+    Argument ="SAExportThisDatabase()"
+End

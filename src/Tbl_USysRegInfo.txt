@@ -1,0 +1,7 @@
+"Subkey","Type","ValName","Value"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\MattsVCS - Export Database",0,,
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\MattsVCS - Export Database",1,"Library","G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\AccessVCStandalone.mda"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\MattsVCS - Export Database",1,"Expression","=SAExportThisDataBase()"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",0,,
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Library","G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\AccessVCStandalone.mda"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Expression","=OpenMattsVCSForm()"
