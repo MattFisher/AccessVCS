@@ -100,7 +100,7 @@
 '            If Left(td.Name, 4) <> "MSys" Then
 '                If performExport Then
 '                    'for each
-'                    If tableDataInXML Or SAContainsOleFields(td) Then
+'                    If tableDataInXML Or TableContainsOleFields(td) Then
 '                    'If a table contains OLE objects, use XML (.xml)
 '                    'Otherwise stick with an XML schema (.xsd) + text data (.txt)
 '                        appAccess.ExportXML objectType:=acExportTable, _
@@ -367,12 +367,12 @@
 '
 'End Function
 '
-'Public Function SAContainsOleFields(td As TableDef) As Boolean
+'Public Function TableContainsOleFields(td As TableDef) As Boolean
 'Dim f As Field
-'SAContainsOleFields = False
+'TableContainsOleFields = False
 'For Each f In td.Fields
 '    If f.Type = dbLongBinary Then
-'        SAContainsOleFields = True
+'        TableContainsOleFields = True
 '        Exit For
 '    End If
 'Next f
@@ -382,27 +382,27 @@
 'getDBFolderName = getFSO.GetParentFolderName(CurrentDb.Name)
 'End Function
 '
-'Public Function SAExportThisDataBase() As Boolean
+'Public Function ExportThisDataBase() As Boolean
 '
 'Dim exportLoc As String
 'exportLoc = getDBFolderName & "\src"
-'SAExportThisDataBase = False
+'ExportThisDataBase = False
 '
 'Set appAccess = Application
 'MsgBox "EXPORTED:" & vbCrLf & SAExportDatabaseObjects(exportLoc, True)
-'SAExportThisDataBase = True
+'ExportThisDataBase = True
 '
 'End Function
 '
-'Public Function SAImportThisDataBase() As Boolean
+'Public Function ImportThisDataBase() As Boolean
 '
 'Dim importLoc As String
 'importLoc = getDBFolderName & "\src"
-'SAImportThisDataBase = False
+'ImportThisDataBase = False
 '
 'Set appAccess = Application
 'MsgBox "IMPORTED:" & vbCrLf & SAImportDatabaseObjects(importLoc, True)
-'SAImportThisDataBase = True
+'ImportThisDataBase = True
 '
 'End Function
 '

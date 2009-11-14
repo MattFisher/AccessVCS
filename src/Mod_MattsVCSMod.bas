@@ -34,17 +34,139 @@ Const PREFIX_PAGE As String = "Pge_"
 Const PREFIX_QUERY As String = "Qry_"
 Const PREFIX_TABLE As String = "Tbl_"
 
+Public Const TABLE_LIST_TABLENAME As String = "__TABLE_LIST__"
+Public Const TABLE_LIST_FILENAME As String = TABLE_LIST_TABLENAME & ".xml"
+Public exportLoc As String
+
+'These are constants for tableDefs that are wrong.
+'This is incorrectly defined as &H1 within Access
+'Public Const dbHiddenObject As Long = &H2
+'This is incorrectly defined as &H80000002 within Access
+'Public Const dbSystemObject As Long = &H80000000
+'This makes some kind of sense, in that every system object
+'is hidden, but it means
+' (tableDef.Attributes And dbSystemObject) = true
+'when tableDef.Attributes = dbHiddenObject.
+            
 'PictureTypes
 Const Embedded = 0
 Const Linked = 1
 
-Dim appAccess As Access.Application
+Dim app As Access.Application
 Const SADebug As Boolean = True
 
 Dim tableCount, queryCount, formCount, moduleCount As Integer
 Dim macroCount, reportCount, pageCount, classCount As Integer
 Dim processTables, processQueries, processForms, processModules As Boolean
 Dim processMacros, processReports, processPages, processClasses As Boolean
+
+Private Sub ExportForm(formName As String)
+Set app = Access.Application
+app.SaveAsText acForm, formName, _
+               exportLoc & formName & ".frm"
+End Sub
+
+Private Sub Test_ExportForm1()
+'ExportForm "MattsVCSFrm"
+ExportForm "TableSubFrm"
+End Sub
+
+Private Sub ImportForm(formName As String)
+Set app = Access.Application
+app.LoadFromText acForm, formName, _
+                 exportLoc & formName & ".frm"
+End Sub
+
+Private Sub Test_ImportForm()
+'ImportForm "MattsVCSFrm"
+ImportForm "TableSubFrm"
+End Sub
+
+Private Sub ExportTableSchemaAsXsd(tableNameStr As String)
+Set app = Access.Application
+app.ExportXML objectType:=acExportTable, _
+              DataSource:=tableNameStr, _
+              SchemaTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_SCHEMA
+End Sub
+
+Private Sub ExportTableSchemaAndDataAsXml(tableNameStr As String)
+Set app = Access.Application
+app.ExportXML objectType:=acExportTable, _
+              DataSource:=tableNameStr, _
+              DataTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED, _
+              OtherFlags:=acEmbedSchema
+End Sub
+
+Private Sub ExportTableDataOnlyAsXml(tableNameStr As String)
+Set app = Access.Application
+app.ExportXML objectType:=acExportTable, _
+              DataSource:=tableNameStr, _
+              DataTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED
+End Sub
+
+Private Sub ExportTableDataAsTxt(tableNameStr As String)
+Set app = Access.Application
+app.DoCmd.TransferText TransferType:=acExportDelim, _
+                       tableName:=tableNameStr, _
+                       FileName:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_DATA, _
+                       HasFieldNames:=True
+End Sub
+
+Private Sub ExportListedTables()
+'Currently takes 16 seconds
+Set app = Access.Application
+Debug.Print "***** Tables *****"
+exportLoc = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\src\"
+Debug.Print TABLE_LIST_TABLENAME
+app.ExportXML objectType:=acExportTable, _
+              DataSource:=TABLE_LIST_TABLENAME, _
+              DataTarget:=exportLoc & TABLE_LIST_FILENAME, _
+              OtherFlags:=acEmbedSchema
+Dim TableList As DAO.Recordset
+Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenSnapshot)
+    If Not TableList.EOF Then
+        TableList.MoveFirst
+        While Not TableList.EOF
+            If TableList("Tbl_ContainsBinary") Then
+                If TableList("Tbl_ExportSchema") Then
+                    If TableList("Tbl_ExportData") Then
+                        Debug.Print TableList("Tbl_Name") & " (Combined XML)"
+                        ExportTableSchemaAndDataAsXml TableList("Tbl_Name")
+                    Else
+                        Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
+                        ExportTableSchemaAsXsd TableList("Tbl_Name")
+                    End If
+                Else
+                    If TableList("Tbl_ExportData") Then
+                        Debug.Print TableList("Tbl_Name") & " (XML Data Only)"
+                        ExportTableDataOnlyAsXml TableList("Tbl_Name")
+                    End If
+                End If
+            Else
+                If TableList("Tbl_ExportSchema") Then
+                    Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
+                    ExportTableSchemaAsXsd TableList("Tbl_Name")
+                    If TableList("Tbl_ExportData") Then
+                        Debug.Print TableList("Tbl_Name") & " (TXT Data)"
+                        ExportTableDataAsTxt TableList("Tbl_Name")
+                    End If
+                Else
+                    If TableList("Tbl_ExportData") Then
+                        Debug.Print TableList("Tbl_Name") & " (TXT Data)"
+                        ExportTableDataAsTxt TableList("Tbl_Name")
+                    End If
+                End If
+            End If
+            TableList.MoveNext
+        Wend
+    End If
+TableList.Close
+
+Dim exportIniFile As String
+exportIniFile = Dir(exportLoc & "export.ini")
+If exportIniFile <> "" Then Kill exportLoc & exportIniFile
+
+End Sub
 
 Public Sub test()
 Dim c As Container
@@ -96,7 +218,7 @@ End Sub
 '    Set c = db.Containers(getDocTypeName(docType))
 '    For Each d In c.Documents
 '        If performExport Then
-'            appAccess.SaveAsText docType, d.Name, _
+'            app.SaveAsText docType, d.Name, _
 '                exportLocation & getDocTypePrefix(docType) & _
 '                d.Name & EXPORT_FILE_EXT
 '        End If
@@ -107,6 +229,13 @@ End Sub
 'End If
 'End Sub
 '
+
+Public Sub test_TableDefs()
+Dim td As TableDef
+Dim db As DAO.Database
+Set db = CurrentDb
+Set td = db.TableDefs("FB-NEW_TABLE")
+End Sub
 
 Public Sub Test_FormsHaveEmbeddedImages()
 MsgBox FormsHaveEmbeddedImages()
@@ -122,7 +251,7 @@ Dim myForm As Form
 Dim currControl As Control
 Set c = db.Containers("Forms")
 For Each d In c.Documents
-    If d.Name <> "MattsVCSFrm" Then
+    If (d.Name <> "MattsVCSFrm") And (d.Name <> "TableSubFrm") Then
         DoCmd.OpenForm d.Name, acDesign, , , acFormPropertySettings, acHidden
         Set myForm = Forms(d.Name)
         If (myForm.PictureType = Embedded) And _
@@ -178,15 +307,15 @@ Next myDoc
 
 End Sub
 
-Public Sub Test_exportForm()
-Application.SaveAsText acForm, "MattsVCSFrm", _
+Public Sub Test_ExportForm()
+Application.SaveAsText acForm, "Copy of MattsVCSFrm", _
         "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\src\Frm_MattsVCSFrm.frm"
 End Sub
 
 'Takes the exportFilename and exports all objects to files in the given exportLocation
-Public Function SAExportDatabaseObjects(exportLocation As String, _
+Public Function ExportDatabaseObjects(exportLocation As String, _
                                 Optional performExport As Boolean = True) As String
-On Error GoTo Err_SAExportDatabaseObjects
+On Error GoTo Err_ExportDatabaseObjects
 
 Dim db As Database
 Dim td As TableDef
@@ -214,7 +343,7 @@ processMacros = True
 processReports = True
 processPages = True
 
-Set db = appAccess.CurrentDb
+Set db = app.CurrentDb
 
 StartTimer
 
@@ -225,102 +354,94 @@ End If
 
 If Not (db Is Nothing) Then
     If processTables Then
-        For Each td In db.TableDefs 'Tables
-            If Left(td.Name, 4) <> "MSys" Then
-                If performExport Then
-                    'for each
-                    If tableDataInXML Or SAContainsOleFields(td) Then
-                    'If a table contains OLE objects, use XML (.xml)
-                    'Otherwise stick with an XML schema (.xsd) + text data (.txt)
-                        appAccess.ExportXML objectType:=acExportTable, _
-                                              DataSource:=td.Name, _
-                                              DataTarget:=exportLocation & PREFIX_TABLE & td.Name & FILE_EXT_TABLE_COMBINED, _
-                                              OtherFlags:=acEmbedSchema
-                    Else
-                        appAccess.ExportXML objectType:=acExportTable, _
-                                              DataSource:=td.Name, _
-                                              SchemaTarget:=exportLocation & PREFIX_TABLE & td.Name & FILE_EXT_TABLE_SCHEMA
-                        appAccess.DoCmd.TransferText acExportDelim, , td.Name, exportLocation & PREFIX_TABLE & td.Name & FILE_EXT_TABLE_DATA, True
-                    End If
-                End If
-                tableCount = tableCount + 1
-                CheckTimer
-            End If
-        Next td
+        'tableCount = ListTables
+        ExportListedTables
     End If
-    SAExportDatabaseObjects = tableCount & " tables" & vbCrLf
+    ExportDatabaseObjects = tableCount & " tables" & vbCrLf
 
     If processForms Then
+        Debug.Print "***** Forms *****"
         Set c = db.Containers("Forms")
         For Each d In c.Documents
             If performExport Then
-                appAccess.SaveAsText acForm, d.Name, exportLocation & PREFIX_FORM & d.Name & FILE_EXT_FORM
+                Debug.Print "Exporting Form: " & d.Name
+                app.SaveAsText acForm, d.Name, exportLocation & PREFIX_FORM & d.Name & FILE_EXT_FORM
             End If
             formCount = formCount + 1
             CheckTimer
         Next d
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & formCount & " forms" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & formCount & " forms" & vbCrLf
     
     If processClasses Then
+        Debug.Print "***** Classes *****"
         Set c = db.Containers("Classes")
         For Each d In c.Documents
             If performExport Then
-                appAccess.SaveAsText acReport, d.Name, exportLocation & PREFIX_CLASS & d.Name & FILE_EXT_CLASS
+                Debug.Print "Exporting Class: " & d.Name
+                app.SaveAsText acReport, d.Name, exportLocation & PREFIX_CLASS & d.Name & FILE_EXT_CLASS
             End If
             classCount = classCount + 1
             CheckTimer
         Next d
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & classCount & " classes" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & classCount & " classes" & vbCrLf
     
     'If processPages ...
     'pageCount & " data access pages"
     
     If processReports Then
+        Debug.Print "***** Reports *****"
         Set c = db.Containers("Reports")
         For Each d In c.Documents
             If performExport Then
-                appAccess.SaveAsText acReport, d.Name, exportLocation & PREFIX_REPORT & d.Name & FILE_EXT_REPORT
+                Debug.Print "Exporting Report: " & d.Name
+                app.SaveAsText acReport, d.Name, exportLocation & PREFIX_REPORT & d.Name & FILE_EXT_REPORT
             End If
             reportCount = reportCount + 1
             CheckTimer
         Next d
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & reportCount & " reports" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & reportCount & " reports" & vbCrLf
     
     If processMacros Then
+        Debug.Print "***** Macros *****"
         Set c = db.Containers("Scripts")
         For Each d In c.Documents
             If performExport Then
-                appAccess.SaveAsText acMacro, d.Name, _
+                Debug.Print "Exporting Macro: " & d.Name
+                app.SaveAsText acMacro, d.Name, _
                                      exportLocation & PREFIX_MACRO & d.Name & FILE_EXT_MACRO
             End If
             macroCount = macroCount + 1
             CheckTimer
         Next d
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & macroCount & " macros" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & macroCount & " macros" & vbCrLf
     
     If processModules Then
+        Debug.Print "***** Modules *****"
         Set c = db.Containers("Modules")
         For Each d In c.Documents
             If performExport Then
-                appAccess.SaveAsText acModule, d.Name, _
+                Debug.Print "Exporting Module: " & d.Name
+                app.SaveAsText acModule, d.Name, _
                                      exportLocation & PREFIX_MODULE & d.Name & FILE_EXT_MODULE
             End If
             moduleCount = moduleCount + 1
             CheckTimer
         Next d
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & moduleCount & " modules" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & moduleCount & " modules" & vbCrLf
     
     If processQueries Then
+        Debug.Print "***** Queries *****"
         For i = 0 To db.QueryDefs.Count - 1
             'Skip the embedded queries
             If Left(db.QueryDefs(i).Name, 1) <> "~" Then
                 If performExport Then
-                    appAccess.SaveAsText acQuery, db.QueryDefs(i).Name, _
+                    Debug.Print "Exporting Query: " & d.Name
+                    app.SaveAsText acQuery, db.QueryDefs(i).Name, _
                                          exportLocation & PREFIX_QUERY & db.QueryDefs(i).Name & FILE_EXT_QUERY
                 End If
                 queryCount = queryCount + 1
@@ -328,7 +449,7 @@ If Not (db Is Nothing) Then
             End If
         Next i
     End If
-    SAExportDatabaseObjects = SAExportDatabaseObjects & queryCount & " queries" & vbCrLf
+    ExportDatabaseObjects = ExportDatabaseObjects & queryCount & " queries" & vbCrLf
     
 End If
 
@@ -339,20 +460,21 @@ If False Then MsgBox "All database objects have been exported as text and XML fi
        "Total time taken: " & GetTimeString(CheckTimer), _
        vbInformation
 
-Exit_SAExportDatabaseObjects:
+Exit_ExportDatabaseObjects:
     Exit Function
     
-Err_SAExportDatabaseObjects:
-    MsgBox Err.Number & " - " & Err.Description
-    Resume Exit_SAExportDatabaseObjects
+Err_ExportDatabaseObjects:
+    MsgBox Err.number & " - " & Err.Description & vbCrLf & _
+    Error$
+    Resume Next
 
 End Function
 
-'Imports all valid text files in the importFolder to the currentDB of appAccess.
-Public Function SAImportDatabaseObjects(importFolder As String, _
+'Imports all valid text files in the importFolder to the currentDB of app.
+Public Function ImportDatabaseObjects(importFolder As String, _
                                       Optional importObjects As Boolean = True) _
                                       As String
-On Error GoTo Err_SAImportDatabaseObjects
+On Error GoTo Err_ImportDatabaseObjects
 
 'importFolder = "C:\OPT\TestDBs\Export\" 'Do not forget the closing back slash! ie: C:\Temp\
 
@@ -395,7 +517,7 @@ While ucFileName <> ""
             tableCount = tableCount + 1
             
             If importObjects Then
-                appAccess.ImportXML importFolder & origFileName, acStructureAndData
+                app.ImportXML importFolder & origFileName, acStructureAndData
             End If
             
         End If
@@ -408,13 +530,13 @@ While ucFileName <> ""
             tableCount = tableCount + 1
             
             If importObjects Then
-                appAccess.ImportXML importFolder & origFileName, acStructureOnly
+                app.ImportXML importFolder & origFileName, acStructureOnly
                 'Also import the corresponding data file
                 objectName = Mid(origFileName, Len(PREFIX_TABLE) + 1, _
                              Len(origFileName) - Len(PREFIX_TABLE) - Len(FILE_EXT_TABLE_SCHEMA))
                 dataFileName = importFolder & PREFIX_TABLE & objectName & FILE_EXT_TABLE_DATA
                 If GetFSO.FileExists(dataFileName) Then
-                    appAccess.DoCmd.TransferText acImportDelim, , objectName, dataFileName, True
+                    app.DoCmd.TransferText acImportDelim, , objectName, dataFileName, True
                 End If
             End If
             
@@ -493,7 +615,7 @@ While ucFileName <> ""
         End If
             
         If importObjects And (objectType <> "") Then
-            appAccess.LoadFromText objectType, objectName, importFolder & origFileName
+            app.LoadFromText objectType, objectName, importFolder & origFileName
         End If
         
     End If
@@ -506,7 +628,7 @@ While ucFileName <> ""
 Wend
 
 '"Statistics for " & importFolder & ":" & vbCrLf & vbCrLf &
-SAImportDatabaseObjects = _
+ImportDatabaseObjects = _
        tableCount & " tables" & vbCrLf & _
        queryCount & " queries" & vbCrLf & _
        formCount & " forms" & vbCrLf & _
@@ -515,46 +637,75 @@ SAImportDatabaseObjects = _
        reportCount & " reports" & vbCrLf & _
        pageCount & " data access pages"
     
-Exit_SAImportDatabaseObjects:
+Exit_ImportDatabaseObjects:
     Exit Function
     
-Err_SAImportDatabaseObjects:
-    MsgBox Err.Number & " - " & Err.Description
-    Resume Exit_SAImportDatabaseObjects
+Err_ImportDatabaseObjects:
+    MsgBox Err.number & " - " & Err.Description
+    Resume Exit_ImportDatabaseObjects
     
 End Function
 
-Public Function SAContainsOleFields(td As TableDef) As Boolean
+Public Function TableContainsOleFields(tableName As String) As Boolean
+On Error GoTo ErrProc
+Dim db As DAO.Database
+Dim td As TableDef
 Dim f As Field
-SAContainsOleFields = False
+TableContainsOleFields = False
+Set db = CurrentDb
+Set td = db.TableDefs(tableName)
 For Each f In td.Fields
-    If f.Type = dbLongBinary Then
-        SAContainsOleFields = True
+    If (f.Type = dbLongBinary) Or (f.Type = dbVarBinary) Then
+        TableContainsOleFields = True
         Exit For
     End If
 Next f
+Exit Function
+ErrProc:
+DispErrMsgGSb Error$, "check if a table contains OLE fields"
+Resume Next
 End Function
 
-Public Function SAExportThisDataBase() As Boolean
+Public Function ExportThisDataBase() As Boolean
 
 Dim exportLoc As String
-exportLoc = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\src"
-SAExportThisDataBase = False
+If Not IsNull(Forms("MattsVCSFrm")) Then
+    exportLoc = Form_MattsVCSFrm.C_SourceDirNxt
+Else
+    exportLoc = "C:\Documents and Settings\Matt\My Documents\Projects\test"
+End If
+ExportThisDataBase = False
 
-Set appAccess = Application
-MsgBox "EXPORTED:" & vbCrLf & SAExportDatabaseObjects(exportLoc, True)
-SAExportThisDataBase = True
+Set app = Application
+MsgBox "EXPORTED:" & vbCrLf & ExportDatabaseObjects(exportLoc, True)
+ExportThisDataBase = True
 
 End Function
 
-Public Function SAImportThisDataBase() As Boolean
+Public Function ImportThisDataBase() As Boolean
 
 Dim importLoc As String
 importLoc = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\src"
-SAImportThisDataBase = False
+ImportThisDataBase = False
 
-Set appAccess = Application
-MsgBox "IMPORTED:" & vbCrLf & SAImportDatabaseObjects(importLoc, True)
-SAImportThisDataBase = True
+Set app = Application
+MsgBox "IMPORTED:" & vbCrLf & ImportDatabaseObjects(importLoc, True)
+ImportThisDataBase = True
 
+End Function
+
+
+Public Function testStuff()
+Debug.Print "dbAttachExclusive: "
+printHexTest dbAttachExclusive
+Debug.Print "dbAttachSavePWD: "
+printHexTest dbAttachSavePWD
+Debug.Print "dbSystemObject: "
+printHexTest dbSystemObject
+Debug.Print "dbHiddenObject: "
+printHexTest dbHiddenObject
+Debug.Print "dbAttachedTable: "
+printHexTest dbAttachedTable
+Debug.Print "dbAttachedODBC: "
+printHexTest dbAttachedODBC
 End Function

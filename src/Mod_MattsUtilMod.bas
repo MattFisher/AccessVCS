@@ -1,6 +1,74 @@
 Option Compare Database
 Option Explicit
 
+Public Sub Test_Int2BinaryStr()
+Dim i As Variant
+Dim numArray() As Variant
+numArray = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 15, 16, 32, 1024, 2048, -1, -2, -3, -4)
+For Each i In numArray
+    printHexTest (CLng(i))
+Next i
+End Sub
+
+Public Sub printHexTest(number As Long)
+Debug.Print number, Format(Replace(Format(Hex(number), "@@@@@@@@"), " ", "0"), "@@@@ @@@@"), Long2BinaryStr(number)
+End Sub
+
+Public Function Int2BinaryStr(aNumber As Long)
+Dim bitNum As Long
+Dim bitValue As Long
+Dim binaryStr As String
+binaryStr = "0"
+'for each int in aNumber
+'Debug.Print "Number: " & aNumber
+If (aNumber < 0) Then binaryStr = "1"
+For bitNum = 30 To 0 Step -1
+    'Debug.Print "bitNum: " & bitNum & " bitValue: " & bitValue
+    'Debug.Print "2^bitNum: " & 2 ^ bitNum
+    'Debug.Print "2^bitNum Imp aNumber: " & (2 ^ bitNum Imp aNumber)
+    'Debug.Print "aNumber or 2^bitNum : " & (aNumber Or 2 ^ bitNum)
+    If (aNumber And 2 ^ bitNum) Then
+        binaryStr = binaryStr & "1"
+    Else
+        binaryStr = binaryStr & "0"
+    End If
+    If (bitNum > 0) And (bitNum Mod 4 = 0) Then
+        binaryStr = binaryStr & " "
+    End If
+Next bitNum
+Int2BinaryStr = binaryStr
+End Function
+
+
+Public Function Long2BinaryStr(aNumber As Long)
+Dim hexString As String
+hexString = Replace(Format(Hex(aNumber), "@@@@@@@@"), " ", "0")
+Dim i As Integer
+Dim AStr As String
+For i = 1 To 8
+    Select Case UCase(Mid(hexString, i, 1))
+        Case "0": AStr = AStr & "0000 "
+        Case "1": AStr = AStr & "0001 "
+        Case "2": AStr = AStr & "0010 "
+        Case "3": AStr = AStr & "0011 "
+        Case "4": AStr = AStr & "0100 "
+        Case "5": AStr = AStr & "0101 "
+        Case "6": AStr = AStr & "0110 "
+        Case "7": AStr = AStr & "0111 "
+        Case "8": AStr = AStr & "1000 "
+        Case "9": AStr = AStr & "1001 "
+        Case "A": AStr = AStr & "1010 "
+        Case "B": AStr = AStr & "1011 "
+        Case "C": AStr = AStr & "1100 "
+        Case "D": AStr = AStr & "1101 "
+        Case "E": AStr = AStr & "1110 "
+        Case "F": AStr = AStr & "1111 "
+    End Select
+Next i
+Long2BinaryStr = Mid(AStr, 1, Len(AStr) - 1) 'Get rid of the last space on the end
+End Function
+
+
 'Awwww these don't work in Access! Disappointing.
 '
 'Public Sub CheckClipboardGSb(msg As String)
