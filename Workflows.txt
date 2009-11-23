@@ -1,0 +1,63 @@
+Workflows:
+
+Scenario 1: Export & Commit
+
+	Start Conditions:
+		Working with .mdb in folder that is a Git repo.
+		Addin has been installed.
+		
+	End Condition:
+		All relevant items present as text files in /src folder
+		Stub of Access .mdb present in ./?
+		What file ends up open? (original file as it stood)
+		Git commit window is open, not modal.
+		
+	Method:
+		- Copy database file (as in VBScript version)
+		- Work from copy
+			- Export all tables, modules, etc.
+			- Remove all tables, modules, etc.
+			- Leave as stub
+				Q:	What remains in a stub that is otherwise not saveable?
+					Is there a way to save this data as, say, XML and restore it later?
+		- Call Git command
+
+
+
+Scenario 2: Build from source
+
+	Start Conditions:
+		Working with .mdb in folder that is a Git repo.
+		Addin has been installed.
+		Export has been done at least once (but this will have to be checked)
+		
+	End Conditions:
+		New version of .mdb has been built from the source files
+		New version of .mdb is open
+		
+	Method:
+		Check if /src files exist
+		Check if .mdb stub exists
+			Y?	Then prompt to export first:
+				"This will build a new .mdb file based on the state of this database when it was last exported."
+				"Do you want to export the database now, and end up with a copy of the db as it now stands?"
+			N?	Then prompt to export first:
+				"This database has not yet been exported to source files."
+				"You need to export the database before building a new version."
+				"Do you want to export the database now and continue the build, or cancel the build?"
+		Copy stub
+		Import all source files into stub
+		Archive original if possible
+		Rename stub to something appropriate
+
+
+Scenario 3:
+
+	Start Conditions:
+		
+	End Conditions:
+		
+	Method:
+
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\11.0\Access\Menu Add-Ins
