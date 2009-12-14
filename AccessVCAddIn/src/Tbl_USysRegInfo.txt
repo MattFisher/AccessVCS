@@ -1,0 +1,4 @@
+"Subkey","Type","ValName","Value"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",0,,
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Library","C:\Documents and Settings\Matt\Application Data\Microsoft\AddIns\AccessVCAddIn.mda"
+"HKEY_CURRENT_ACCESS_PROFILE\Menu Add-ins\&MattsVCS",1,"Expression","=Test_OpenForm()"

@@ -1,0 +1,4 @@
+"FB_TblID","FB_DSN","FB_Location"
+1,"ODBC;DSN=LocalHost:JTaR;DRIVER={Firebird/InterBase(r) driver};DBNAME=LocalHost:JTaR","LocalHost"
+2,"ODBC;DSN=BAEImgSvr:JTaR;DRIVER={Firebird/InterBase(r) driver};DBNAME=BAEImgSvr:JTaR","BAEImgSvr"
+3,"ODBC;DSN=jtar-hsi;DRIVER={Firebird/InterBase(r) driver};DBNAME=LocalHost:JTaR-HSI","HSISvr"
