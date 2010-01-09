@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =141258592
+Checksum =-1207342449
 Begin Form
     RecordSelectors = NotDefault
     MaxButton = NotDefault
@@ -19,13 +19,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =11848
+    Width =21429
     DatasheetFontHeight =10
     ItemSuffix =20
-    Left =885
-    Top =4530
-    Right =12960
-    Bottom =8325
+    Left =1785
+    Top =2445
+    Right =14295
+    Bottom =6240
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0x37c689999c99e340
@@ -34,27 +34,27 @@ Begin Form
         0x2711de0961332741b3b860df5449c8f6
     End
     NameMap = Begin
-        0x0acc0e5500000000ee0e9164b7ae0b4581a2b67df6904ddd00000000cc81bc12 ,
-        0x4b9ce34000008e00010000005f005f005400410042004c0045005f004c004900 ,
-        0x530054005f005f00000000000000b4a82b1fab827c40b0937fc7a28057ee0700 ,
-        0x0000ee0e9164b7ae0b4581a2b67df6904ddd540062006c005f004e0061006d00 ,
-        0x6500000000000000833c8726b6af23439c3046ed7f445cc007000000ee0e9164 ,
-        0xb7ae0b4581a2b67df6904ddd540062006c005f0053006f007500720063006500 ,
-        0x5400610062006c0065004e0061006d006500000000000000886ba6b8eeee8e4b ,
-        0xa3cecd908e12c1cf07000000ee0e9164b7ae0b4581a2b67df6904ddd54006200 ,
-        0x6c005f0043006f006e006e00650063007400000000000000e5af96a7b2ad1d4e ,
-        0xb910055e08350fa507000000ee0e9164b7ae0b4581a2b67df6904ddd54006200 ,
-        0x6c005f00530079007300740065006d00000000000000d49d373c2d0fc1449b20 ,
-        0xf34db6191ed907000000ee0e9164b7ae0b4581a2b67df6904ddd540062006c00 ,
-        0x5f00480069006400640065006e000000000000008b85d604b6ea0b45b8bd8141 ,
-        0x6d2d443607000000ee0e9164b7ae0b4581a2b67df6904ddd540062006c005f00 ,
-        0x44006900730070005400790070006500000000000000e2593b147df6a84c8c5c ,
-        0x6aec82897cea07000000ee0e9164b7ae0b4581a2b67df6904ddd540062006c00 ,
+        0x0acc0e550000000050a4141206492e459b62429ece3ccefc00000000eba1df33 ,
+        0xd79de34000008e0001a2dc025f005f005400410042004c0045005f004c004900 ,
+        0x530054005f005f000000000000008af5d31ce44fe0419c3f3c3278128e910700 ,
+        0x000050a4141206492e459b62429ece3ccefc540062006c005f004e0061006d00 ,
+        0x6500000000000000937310326bb4d649b81e189bad8e89ca0700000050a41412 ,
+        0x06492e459b62429ece3ccefc540062006c005f0053006f007500720063006500 ,
+        0x5400610062006c0065004e0061006d00650000000000000068187ffef83eee4d ,
+        0xb95c28878050ec600700000050a4141206492e459b62429ece3ccefc54006200 ,
+        0x6c005f0043006f006e006e00650063007400000000000000755e7c451e356e42 ,
+        0x914a882720c6e1790700000050a4141206492e459b62429ece3ccefc54006200 ,
+        0x6c005f00530079007300740065006d00000000000000b2959506ac689743a954 ,
+        0x7a400de02c520700000050a4141206492e459b62429ece3ccefc540062006c00 ,
+        0x5f00480069006400640065006e00000000000000dd8711e5cad6004493deb8e9 ,
+        0x20247e050700000050a4141206492e459b62429ece3ccefc540062006c005f00 ,
+        0x44006900730070005400790070006500000000000000955b1c23f58d3149a2e4 ,
+        0x3f87f61833120700000050a4141206492e459b62429ece3ccefc540062006c00 ,
         0x5f0043006f006e007400610069006e007300420069006e006100720079000000 ,
-        0x00000000f55503c1647e5f45ba5005922f7980d607000000ee0e9164b7ae0b45 ,
-        0x81a2b67df6904ddd540062006c005f004500780070006f007200740044006100 ,
-        0x740061000000000000003c620f5fa53bfe4681bf89c530aaff5607000000ee0e ,
-        0x9164b7ae0b4581a2b67df6904ddd540062006c005f004500780070006f007200 ,
+        0x00000000e147cffef2972e4382cbd6c46b0d00b60700000050a4141206492e45 ,
+        0x9b62429ece3ccefc540062006c005f004500780070006f007200740044006100 ,
+        0x74006100000000000000e0c66db8a5ce9742ad3d5043a6e84d510700000050a4 ,
+        0x141206492e459b62429ece3ccefc540062006c005f004500780070006f007200 ,
         0x740053006300680065006d006100000000000000000000000000000000000000 ,
         0x000000000c000000030000000000000000000000000000000000
     End
@@ -327,7 +327,7 @@ Begin Form
             End
         End
         Begin Section
-            Height =305
+            Height =312
             BackColor =16744576
             Name ="Detail"
             GUID = Begin
@@ -340,8 +340,8 @@ Begin Form
                     OverlapFlags =85
                     TextAlign =1
                     IMESentenceMode =3
-                    Left =1305
-                    Top =5
+                    Left =1303
+                    Top =12
                     Width =2676
                     Height =300
                     ColumnWidth =2190
@@ -360,7 +360,7 @@ Begin Form
                     TextAlign =1
                     IMESentenceMode =3
                     Left =6915
-                    Top =5
+                    Top =12
                     Height =300
                     TabIndex =1
                     LeftMargin =57
@@ -378,8 +378,8 @@ Begin Form
                     TextAlign =1
                     IMESentenceMode =3
                     Left =8672
-                    Top =4
-                    Width =2886
+                    Top =12
+                    Width =12741
                     Height =300
                     TabIndex =2
                     LeftMargin =57
@@ -427,6 +427,7 @@ Begin Form
                     TextAlign =2
                     IMESentenceMode =3
                     Left =6180
+                    Top =12
                     Width =621
                     Height =300
                     TabIndex =5

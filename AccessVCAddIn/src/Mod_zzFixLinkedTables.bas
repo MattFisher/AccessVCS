@@ -5,7 +5,7 @@ Option Explicit
 Public LoopCounterGbl As Long
 
 
-Private Sub Delink(LstTblName As String, TblName As Variant, MT As dao.Recordset)
+Private Sub Delink(LstTblName As String, TblName As Variant, MT As DAO.Recordset)
 'The MT recordset is for recording Missing Tables.
 'LstTblName is provided for debugging purposes and for recording in the Missing Table Record is necessary.
 On Error GoTo RecordErr 'On Error trigger gets reset every time you enter this routine.
@@ -30,8 +30,8 @@ End Sub
 
 Public Sub DelinkTbls(DataBaseFilePath As String, LstTblNameStr As String)
 'ListTblNameStr is the Table that has a list of all the tables which are to be delinked and then relinked.
-Dim LoT As dao.Recordset
-Dim MT As dao.Recordset
+Dim LoT As DAO.Recordset
+Dim MT As DAO.Recordset
 Dim NoOfTblProc As Long
 NoOfTblProc = 0
 Set MT = CurrentDb.OpenRecordset("zzMissingTbl", dbOpenDynaset)
@@ -60,7 +60,7 @@ MT.Close
 End Sub
 
 Private Sub ReLinkFB(FETblName As String, BETblName As String, LstTblName As String, _
-DataBaseFilePath As String, acTable, MT As dao.Recordset)
+DataBaseFilePath As String, acTable, MT As DAO.Recordset)
 On Error GoTo ErrTrap
 'LstTblName is provided for use in Missing Tables Error Trap report.
 'This routine link a table from the Front End to the BackEnd.
@@ -84,10 +84,10 @@ End Sub
 
 Public Sub ReLinkFBTbls(DataBaseFilePath As String, LstTblNameStr As String, Optional isODBC As Boolean = False)
 'ListTblNameStr is the Table that has a list of all the tables which are to be delinked and then relinked.
-Dim LoT As dao.Recordset
-Dim MT As dao.Recordset
+Dim LoT As DAO.Recordset
+Dim MT As DAO.Recordset
 Dim NoOfTblProc As Long
-Dim qdf As dao.QueryDef
+Dim qdf As DAO.QueryDef
 NoOfTblProc = 0
 Set MT = CurrentDb.OpenRecordset("zzMissingTbl", dbOpenDynaset)
      Set LoT = CurrentDb.OpenRecordset( _
@@ -122,14 +122,14 @@ MT.Close
 End Sub
     
 Private Sub ReLinkMDB(TblLstingTblStr As String, DataBaseFilePath As String, acTable, _
-RST As dao.Recordset, MT As dao.Recordset)
+RST As DAO.Recordset, MT As DAO.Recordset)
 'TblLstingTblStr is only given for debugging.
 'This routine link a table from the Front End to the BackEnd.
 'The table in the BackEnd is the usually given the same name in the FrontEnd but can be different if desired.
 On Error GoTo ErrorTrap
 Dim NameOfTblInBE  As String
 Dim NameGiven2TblInFE As String
-Dim tdf As dao.TableDef
+Dim tdf As DAO.TableDef
 'Display which Tbl is being delinked.
 NameOfTblInBE = RST("TblName")
 NameGiven2TblInFE = RST("TblName")
@@ -154,8 +154,8 @@ End Sub
 
 Public Sub ReLinkMDBTbls(DataBaseFilePath As String, ListTblNameStr As String, Optional isODBC As Boolean = False)
 'ListTblNameStr is the Table that has a list of all the tables which are to be delinked and then relinked.
-Dim LoT As dao.Recordset
-Dim MT As dao.Recordset
+Dim LoT As DAO.Recordset
+Dim MT As DAO.Recordset
 Dim NoOfTblProc As Long
 NoOfTblProc = 0
 Set MT = CurrentDb.OpenRecordset("zzMissingTbl", dbOpenDynaset)

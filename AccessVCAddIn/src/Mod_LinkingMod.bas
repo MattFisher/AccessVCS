@@ -22,7 +22,7 @@ Dim importFolder As String
 
 Private Sub DelinkTbls(LoTbls As String)
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 Dim FELinkTblName As String
 Dim TblCnt As Long
 TblCnt = 0
@@ -56,7 +56,7 @@ Private Sub Link2MDBTblsOld(TblLstingTblStr As String, DataBaseFilePath As Strin
 On Error GoTo ErrorTrap
 Dim NameOfTblInBE  As String
 Dim NameGiven2TblInFE As String
-Dim tdf As dao.TableDef
+Dim tdf As DAO.TableDef
 'Display which Tbl is being delinked.
 'NameOfTblInBE = RST("TblName")
 'NameGiven2TblInFE = RST("TblName")
@@ -76,7 +76,7 @@ GoTo ExitProc
 End Sub
 
 Private Sub RecordMissingTable(TblName As String, CommentStr As String)
-Dim MT As dao.Recordset
+Dim MT As DAO.Recordset
 SQLStr = "SELECT * " & _
             "FROM zzMissingTbl " & _
             "WHERE MT_TblName='" & TblName & "'"
@@ -98,7 +98,7 @@ On Error GoTo ErrProc
 'DoCmd.TransferDatabase acLink, "ODBC Database", _
 'DataBaseFilePath, _
 'acTable, BETblName, FETblName
-Dim FBLot As dao.Recordset
+Dim FBLot As DAO.Recordset
 SQLStr = "SELECT BETblName, FELinkTblName " & _
             "FROM " & TblName & " " & _
             "ORDER BY BETblName"
@@ -123,13 +123,13 @@ End Sub
 Private Sub Link2MDBTbls(LoTbls As String, DBFilePath As String, DatabaseType As String)
 'ListTblNameStr is the Table that has a list of all the tables which are to be delinked and then relinked.
 On Error GoTo ErrProc
-Dim LoT As dao.Recordset 'zzAppLoTMDBBETbl
+Dim LoT As DAO.Recordset 'zzAppLoTMDBBETbl
 'Fields in zzAppLoTMDBBETbl
 'TblID, BETblName, Selected, FELinkTblName
 Dim NoOfTblProc As Long
 Dim NameOfTblInBE As String
 Dim NameGiven2TblInFE As String
-Dim TblDef As dao.TableDef
+Dim TblDef As DAO.TableDef
 NoOfTblProc = 0
 Set LoT = CurrentDb.OpenRecordset(LoTbls, dbOpenSnapshot)
      NoOfTblProc = 0 'Reset counter
@@ -168,7 +168,7 @@ ErrProc:
 End Sub
 
 Private Sub SetFBDSN()
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT FB_DSN, FB_Location " & _
     "FROM zzFBDescTbl WHERE FB_TblID= " & AssignVar2LngGFn(C_FBDBSelectionFra)
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -181,7 +181,7 @@ RecSet.Close
 End Sub
 
 Private Function TablesMissingFn() As Boolean
-Dim MT As dao.Recordset
+Dim MT As DAO.Recordset
 SQLStr = "SELECT COUNT(MT_TblID) AS NoOfTables " & _
 "FROM zzMissingTbl"
 Set MT = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -252,25 +252,31 @@ Dim db As Database
 Dim td As TableDef
 Dim d As Document
 Dim c As Container
-Dim TableList As dao.Recordset
+Dim TableList As DAO.Recordset
 Dim i As Integer
 Dim resetTableList As Boolean
 resetTableList = True
 
-'MsgBox "In the ListTables Function, CurrentDB: " & Application.CurrentDb.Name
-'If we want a reference to the Code (AddIn) Database at this point, how do we get it?
-'Say if we wanted __TABLE_LIST__ to be a temporary table in the Addin.
-'Would this lose preferences between runs?
-'MsgBox "Access.CodeDb.Name: " & Access.CodeDb.Name
-
 Set db = Access.CurrentDb
-'If exported version of the Table List exists, import it.
+
+'Use this option if the risk of old versions of TABLE_LIST outweighs
+' the benefit of being able to customise export options in it.
+'TODO: Change this to depend on a 'Version' Property for the table.
 If Not TableExistsInDbGFn(TABLE_LIST_TABLENAME, db) Then
     ' Copy "__TABLE_LIST_TEMPLATE__" from codeDB to currentDB
     DoCmd.TransferDatabase acImport, "Microsoft Access", _
         CodeDb.Name, acTable, "__TABLE_LIST_TEMPLATE__", _
         TABLE_LIST_TABLENAME, True
 End If
+
+'If TableExistsInDbGFn(TABLE_LIST_TABLENAME, db) Then
+'    'DoCmd.DeleteObject acTable, TABLE_LIST_TABLENAME
+'End If
+'' Copy "__TABLE_LIST_TEMPLATE__" from codeDB to currentDB
+'DoCmd.TransferDatabase acImport, "Microsoft Access", _
+'    CodeDb.Name, acTable, "__TABLE_LIST_TEMPLATE__", _
+'    TABLE_LIST_TABLENAME, True
+
 
 If resetTableList Then CurrentDb.Execute "DELETE * FROM " & TABLE_LIST_TABLENAME
 
@@ -294,7 +300,8 @@ Set TableList = CurrentDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenTable)
     
         If (td.Name <> TABLE_LIST_TABLENAME) And _
            ((td.Attributes And dbSystemObject) = 0) And _
-           ((td.Attributes And dbHiddenObject) = 0) Then
+           ((td.Attributes And dbHiddenObject) = 0) And _
+           (Left(td.Name, 4) <> "MSys") Then
             TableList.AddNew
                 TableList("Tbl_Name") = td.Name
                 TableList("Tbl_SourceTableName") = td.SourceTableName
@@ -340,7 +347,7 @@ End Function
 
 Private Sub RestoreTableList()
 Dim tableListFilename As String
-Dim db As dao.Database
+Dim db As DAO.Database
 importFolder = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\src\"
 tableListFilename = Dir(importFolder & TABLE_LIST_FILENAME)
 If tableListFilename <> "" Then
@@ -362,7 +369,7 @@ importFolder = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\src
 
 Dim db As Database
 Dim td As TableDef
-Dim TableList As dao.Recordset
+Dim TableList As DAO.Recordset
 Dim i As Integer
 Dim app As Access.Application
 
@@ -382,7 +389,8 @@ Set TableList = db.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpen
                                            TableList("Tbl_SourceTableName"), _
                                            TableList("Tbl_Connect"))
                 db.TableDefs.Append td
-            ElseIf Not TableList("Tbl_System") Then
+            ElseIf ((Not TableList("Tbl_System")) And _
+                    (Left(TableList("Tbl_Name"), 4) <> "MSys")) Then
                 'MSysAccessObjects 'Doesn't allow deletion
                 'MSysACEs 'System - doesn't allow deletion
                 'MSysObjects 'System - doesn't allow deletion

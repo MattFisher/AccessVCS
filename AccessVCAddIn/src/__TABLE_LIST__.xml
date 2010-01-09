@@ -60,9 +60,26 @@
 </xsd:complexType>
 </xsd:element>
 </xsd:schema>
-<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2009-12-15T08:48:59">
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-01-09T20:30:49">
 <__TABLE_LIST__>
-<Tbl_ID>21</Tbl_ID>
+<Tbl_ID>227</Tbl_ID>
+<Tbl_Name>__ScriptTbl__</Tbl_Name>
+<Tbl_SourceTableName></Tbl_SourceTableName>
+<Tbl_Connect></Tbl_Connect>
+<Tbl_ExportSchema>1</Tbl_ExportSchema>
+<Tbl_ExportData>1</Tbl_ExportData>
+<Tbl_DispType>Local</Tbl_DispType>
+<Tbl_Attributes>0</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLE_LIST__>
+<__TABLE_LIST__>
+<Tbl_ID>228</Tbl_ID>
 <Tbl_Name>__TABLE_LIST_TEMPLATE__</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -79,7 +96,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>22</Tbl_ID>
+<Tbl_ID>229</Tbl_ID>
 <Tbl_Name>DatabaseEntityTbl</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -96,7 +113,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>23</Tbl_ID>
+<Tbl_ID>230</Tbl_ID>
 <Tbl_Name>DatabaseEntityTypeTbl</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -113,7 +130,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>24</Tbl_ID>
+<Tbl_ID>231</Tbl_ID>
 <Tbl_Name>FB-NEW_TABLE</Tbl_Name>
 <Tbl_SourceTableName>NEW_TABLE</Tbl_SourceTableName>
 <Tbl_Connect>ODBC;DSN=FB_TEST_DB;Driver=Firebird/InterBase(r) driver;Dbname=C:\Documents and Settings\Matt\My Documents\Projects\FB_TEST_DB.FDB;CHARSET=ASCII;</Tbl_Connect>
@@ -130,24 +147,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>25</Tbl_ID>
-<Tbl_Name>MSysAccessXML</Tbl_Name>
-<Tbl_SourceTableName></Tbl_SourceTableName>
-<Tbl_Connect></Tbl_Connect>
-<Tbl_ExportSchema>1</Tbl_ExportSchema>
-<Tbl_ExportData>1</Tbl_ExportData>
-<Tbl_DispType>Local</Tbl_DispType>
-<Tbl_Attributes>0</Tbl_Attributes>
-<Tbl_System>0</Tbl_System>
-<Tbl_Hidden>0</Tbl_Hidden>
-<Tbl_AttachedTable>0</Tbl_AttachedTable>
-<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
-<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
-<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
-<Tbl_ContainsBinary>1</Tbl_ContainsBinary>
-</__TABLE_LIST__>
-<__TABLE_LIST__>
-<Tbl_ID>26</Tbl_ID>
+<Tbl_ID>232</Tbl_ID>
 <Tbl_Name>Tasks</Tbl_Name>
 <Tbl_SourceTableName>Tasks</Tbl_SourceTableName>
 <Tbl_Connect>;DATABASE=G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\TestDB.mdb</Tbl_Connect>
@@ -164,7 +164,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>27</Tbl_ID>
+<Tbl_ID>233</Tbl_ID>
 <Tbl_Name>USysRegInfo</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -181,7 +181,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>28</Tbl_ID>
+<Tbl_ID>234</Tbl_ID>
 <Tbl_Name>zzAppLoTFBTbl</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -198,7 +198,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>29</Tbl_ID>
+<Tbl_ID>235</Tbl_ID>
 <Tbl_Name>zzFBDescTbl</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -215,7 +215,7 @@
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
 </__TABLE_LIST__>
 <__TABLE_LIST__>
-<Tbl_ID>30</Tbl_ID>
+<Tbl_ID>236</Tbl_ID>
 <Tbl_Name>zzMissingTbl</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>

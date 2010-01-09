@@ -171,7 +171,7 @@ End Function
 
 Public Function GetDBDSNsGFn(ByRef DSNofMainDB As String, ByRef DSNofBkUpDB As String) As Boolean
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 GetDBDSNsGFn = False
 SQLStr = "SELECT LTDBPath, LTDBPurpose " & _
      "FROM MDB_zzCSTbl ICST " & _
@@ -207,7 +207,7 @@ ErrProc:
 End Function
 
 Public Function GetMainDBDSNGFn(ByRef MainDB_DSN As String) As Boolean
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT LTDBPath " & _
      "FROM MDB_zzCSTbl ICST " & _
      "INNER JOIN zzLink2ClientsDBLstTbl L2CT ON ICST.CLIENTNAME4LINKING = L2CT.LTClientName " & _
@@ -225,7 +225,7 @@ RecSet.Close
 End Function
 
 Public Function GetBkUpDBDSNGFn(ByRef BkupDB_DSN As String) As Boolean
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT LTDBPath " & _
      "FROM MDB_zzCSTbl ICST " & _
      "INNER JOIN zzLink2ClientsDBLstTbl L2CT ON ICST.CLIENTNAME4LINKING = L2CT.LTClientName " & _
@@ -245,7 +245,7 @@ End Function
 Public Function UserHasNoWkCensGFn(UserInits As String) As Boolean
 On Error GoTo ErrProc
 Dim SQLStr As String
-Dim WkCenT As dao.Recordset
+Dim WkCenT As DAO.Recordset
 SQLStr = "SELECT WkCen FROM WkCen1stTbl WHERE Mngr='" & UserInits & "'"
 Set WkCenT = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
      If Not WkCenT.EOF Then
@@ -270,7 +270,7 @@ Optional FailNullStr As String = "NullVal", Optional FailNoRecStr As String = "N
 'Sends back a string.
 On Error GoTo ErrProc
      Dim SQLStr As String
-     Dim RecSet As dao.Recordset
+     Dim RecSet As DAO.Recordset
      If Not IsNull(IDFdValVar) Then
           If IsNumeric(IDFdValVar) Then 'A number - construct SQLStr for a number in IDFdValVar
                SQLStr = "SELECT " & FdNameStr & " " & _
@@ -314,7 +314,7 @@ Public Sub GetResGSb(ByRef Width As Long, ByRef Height As Long)
 End Sub
 
 Private Function FrontEndVersionNoFn() As String
-Dim VRT As dao.Recordset
+Dim VRT As DAO.Recordset
 Set VRT = CurrentDb.OpenRecordset("zzVersionTbl", dbOpenDynaset)
     If Not VRT.EOF Then
          VRT.MoveFirst
@@ -326,7 +326,7 @@ VRT.Close
 End Function
 
 Private Function BacKEndVersionNoFn() As String
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 Set RecSet = CurrentDb.OpenRecordset("SELECT DISTINCTROW BacKEndVersionNo FROM MDB_zzCSTbl", dbOpenSnapshot)
     If Not RecSet.EOF Then
          RecSet.MoveFirst
@@ -357,7 +357,7 @@ Public Function GetFBDBDSNGFn(DBPurposeStr As String, DataSourceNameStr As Strin
 'If the particular type of database is not selected for linking the function returns the string "NotSelectedForLinking".
 'We have done this so as to have a generic approach.  Some datbases have a main db and a backup db for safety or journaling.
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT ClientDetails.LTDBPath, ClientDetails.LTDBPurpose, ClientDetails.Selected4Linking " & _
             "FROM zzLink2ClientsDBLstTbl AS ClientDetails " & _
               "INNER JOIN MDB_zzCSTbl AS ClientDBConfig ON ClientDetails.LTClientName = ClientDBConfig.CSCLIENTNAME4LINKING " & _
@@ -388,7 +388,7 @@ ErrProc:
 End Function
 
 Private Function GetBE_PathAndFileNameFn() As String
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT PSU_MDBBEPathAndFileName " & _
             "FROM  zzProgSetUpTbl"
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -402,7 +402,7 @@ RecSet.Close
 End Function
 
 Private Function GetWP_PathAndFileNameFn() As String
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT PSU_MDBWPPathAndFileName " & _
             "FROM  zzProgSetUpTbl"
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -416,7 +416,7 @@ RecSet.Close
 End Function
 
 Private Function GetNWP_PathAndFileNameFn() As String
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT PSU_MDBNWPPathAndFileName " & _
             "FROM  zzProgSetUpTbl"
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -431,7 +431,7 @@ End Function
 
 Public Function GetProgSetUpValueFn(FdName As String) As String
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT " & FdName & " " & _
             "FROM  zzProgSetUpTbl"
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
@@ -449,7 +449,7 @@ End Function
 
 Private Sub StoreAppDirPath(FdVal As String)
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT PSU_AppDirPath " & _
             "FROM  zzProgSetUpTbl"
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenDynaset)

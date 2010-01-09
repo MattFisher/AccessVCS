@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =1164517697
+Checksum =308119713
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
@@ -13,19 +13,20 @@ Begin Form
     AllowEdits = NotDefault
     AllowDesignChanges = NotDefault
     DefaultView =0
+    ScrollBars =0
     ViewsAllowed =1
     TabularFamily =119
     BorderStyle =1
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =13039
+    Width =13209
     DatasheetFontHeight =10
-    ItemSuffix =34
-    Left =345
-    Top =450
-    Right =13380
-    Bottom =10245
+    ItemSuffix =35
+    Left =1065
+    Top =105
+    Right =14280
+    Bottom =8940
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xa87e69fa7798e340
@@ -34,8 +35,8 @@ Begin Form
         0x64ec83390813ae44885105a11c919502
     End
     NameMap = Begin
-        0x0acc0e55000000002711de0961332741b3b860df5449c8f601000000537e2b47 ,
-        0x4b9ce3405000b00a000000005400610062006c00650053007500620046007200 ,
+        0x0acc0e55000000002711de0961332741b3b860df5449c8f60100000090aad853 ,
+        0xd89de340e0915005150000005400610062006c00650053007500620046007200 ,
         0x6d00000000000000000000000000000000000000000000000c00000003000000 ,
         0x0000000000000000000000000000
     End
@@ -205,7 +206,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =9807
+            Height =8844
             BackColor =-2147483633
             Name ="Detail"
             GUID = Begin
@@ -257,7 +258,8 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    Visible = NotDefault
+                    OverlapFlags =93
                     IMESentenceMode =3
                     Left =1874
                     Top =1584
@@ -289,13 +291,13 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =9640
-                    Top =8901
-                    Width =3066
+                    Left =8955
+                    Top =8160
+                    Width =1941
                     Height =576
                     TabIndex =2
                     Name ="C_ExportBtn"
-                    Caption ="Export Database and Commit to Git"
+                    Caption ="Export Database"
                     OnClick ="[Event Procedure]"
                     ObjectPalette = Begin
                         0x0003100000000000800000000080000080800000000080008000800000808000 ,
@@ -309,8 +311,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =340
-                    Top =8900
+                    Left =285
+                    Top =8160
                     Width =1821
                     Height =576
                     TabIndex =3
@@ -508,6 +510,7 @@ Begin Form
                     End
                 End
                 Begin CommandButton
+                    Visible = NotDefault
                     OverlapFlags =85
                     PictureType =1
                     Left =12465
@@ -526,12 +529,12 @@ Begin Form
                 End
                 Begin Subform
                     OverlapFlags =87
-                    Left =340
-                    Top =4638
-                    Width =12360
+                    Left =287
+                    Top =3900
+                    Width =12795
                     Height =4080
                     TabIndex =9
-                    Name ="TableSubFrm"
+                    Name ="TableSubFrmCtl"
                     SourceObject ="Form.TableSubFrm"
                     GUID = Begin
                         0x4d4ca1899be1e541b9210a230df9ca51
@@ -539,8 +542,8 @@ Begin Form
                     Begin
                         Begin Label
                             OverlapFlags =93
-                            Left =340
-                            Top =4308
+                            Left =285
+                            Top =3570
                             Width =1005
                             Height =330
                             FontSize =11
@@ -555,10 +558,10 @@ Begin Form
                     End
                 End
                 Begin Label
-                    OverlapFlags =85
+                    OverlapFlags =247
                     TextFontFamily =49
                     Left =9354
-                    Top =2139
+                    Top =1587
                     Width =2610
                     Height =2235
                     FontSize =9
@@ -568,6 +571,21 @@ Begin Form
                     FontName ="Lucida Console"
                     GUID = Begin
                         0x1efcf21a2e08e5428650d5375b192759
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =11160
+                    Top =8160
+                    Width =1941
+                    Height =576
+                    TabIndex =10
+                    Name ="CommitBtn"
+                    Caption ="Commit to Git"
+                    OnClick ="[Event Procedure]"
+                    ControlTipText ="Apply Filter"
+                    GUID = Begin
+                        0xa640ca1677a49c4bb2d033f5a5553ae5
                     End
                 End
             End
@@ -586,13 +604,13 @@ Private Sub C_ExportBtn_Click()
 On Error GoTo ErrProc
 
 ExportThisDataBase
-Commit2Git exportLoc
 
 ExitProc:
 Exit Sub
     
 ErrProc:
 MsgBox Err
+'Resume Next
 End Sub
 
 Private Sub C_ImportBtn_Click()
@@ -668,13 +686,25 @@ Err_C_PickSourceDirBtn_Click:
     
 End Sub
 
+Private Sub CommitBtn_Click()
+On Error GoTo ErrProc
+
+Commit2Git Me.C_SourceDirNxt
+
+ExitProc:
+Exit Sub
+    
+ErrProc:
+MsgBox Error$
+End Sub
+
 Private Sub Form_Load()
 Dim sourceFolderStr As String
 
 'MsgBox "Listing Tables, CurrentDB: " & Application.CurrentDb.Name
-Set Me.TableSubFrm.Form.Recordset = Nothing
+Set Me.TableSubFrmCtl.Form.Recordset = Nothing
 ListTables
-Set Me.TableSubFrm.Form.Recordset = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenDynaset)
+Set Me.TableSubFrmCtl.Form.Recordset = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenDynaset)
 
 Me.C_ObjectListLbl.Caption = CountAllDBObjectsGFn(CurrentDb)
 CheckForOleFields
@@ -687,6 +717,6 @@ Else
     Me.C_SourceDirNxt = "Source folder does not exist and could not be created"
 End If
 
-Me.TableSubFrm.Form.Recordset.Requery
+Me.TableSubFrmCtl.Form.Recordset.Requery
 
 End Sub

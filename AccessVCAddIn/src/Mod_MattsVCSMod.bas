@@ -36,13 +36,18 @@ Const PREFIX_TABLE As String = "Tbl_"
 
 Public Const TABLE_LIST_TABLENAME As String = "__TABLE_LIST__"
 Public Const TABLE_LIST_FILENAME As String = TABLE_LIST_TABLENAME & ".xml"
-Public exportLoc As String
+Public Const DEFAULT_EXPORT_LOC As String = _
+    "C:\Documents and Settings\Matt\My Documents\Projects\test"
+Public exportLocGbl As String
 
-'These are constants for tableDefs that are wrong.
-'This is incorrectly defined as &H1 within Access
+
+'These are constants for tableDefs that are confusing, if not wrong.
+
 'Public Const dbHiddenObject As Long = &H2
-'This is incorrectly defined as &H80000002 within Access
+'This is defined as &H1 within Access
+
 'Public Const dbSystemObject As Long = &H80000000
+'This is defined as &H80000002 within Access
 'This makes some kind of sense, in that every system object
 'is hidden, but it means
 ' (tableDef.Attributes And dbSystemObject) = true
@@ -55,7 +60,7 @@ Const Linked = 1
 Dim app As Access.Application
 Const SADebug As Boolean = True
 
-Dim tableCount, queryCount, formCount, moduleCount As Integer
+Dim TableCount, queryCount, formCount, moduleCount As Integer
 Dim macroCount, reportCount, pageCount, classCount As Integer
 Dim processTables, processQueries, processForms, processModules As Boolean
 Dim processMacros, processReports, processPages, processClasses As Boolean
@@ -63,7 +68,7 @@ Dim processMacros, processReports, processPages, processClasses As Boolean
 Private Sub ExportForm(formName As String)
 Set app = Access.Application
 app.SaveAsText acForm, formName, _
-               exportLoc & formName & ".frm"
+               exportLocGbl & formName & ".frm"
 End Sub
 
 Private Sub Test_ExportForm1()
@@ -74,7 +79,7 @@ End Sub
 Private Sub ImportForm(formName As String)
 Set app = Access.Application
 app.LoadFromText acForm, formName, _
-                 exportLoc & formName & ".frm"
+                 exportLocGbl & formName & ".frm"
 End Sub
 
 Private Sub Test_ImportForm()
@@ -86,14 +91,14 @@ Private Sub ExportTableSchemaAsXsd(tableNameStr As String)
 Set app = Access.Application
 app.ExportXML objectType:=acExportTable, _
               DataSource:=tableNameStr, _
-              SchemaTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_SCHEMA
+              SchemaTarget:=exportLocGbl & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_SCHEMA
 End Sub
 
 Private Sub ExportTableSchemaAndDataAsXml(tableNameStr As String)
 Set app = Access.Application
 app.ExportXML objectType:=acExportTable, _
               DataSource:=tableNameStr, _
-              DataTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED, _
+              DataTarget:=exportLocGbl & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED, _
               OtherFlags:=acEmbedSchema
 End Sub
 
@@ -101,30 +106,31 @@ Private Sub ExportTableDataOnlyAsXml(tableNameStr As String)
 Set app = Access.Application
 app.ExportXML objectType:=acExportTable, _
               DataSource:=tableNameStr, _
-              DataTarget:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED
+              DataTarget:=exportLocGbl & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_COMBINED
 End Sub
 
 Private Sub ExportTableDataAsTxt(tableNameStr As String)
 Set app = Access.Application
 app.DoCmd.TransferText TransferType:=acExportDelim, _
                        TableName:=tableNameStr, _
-                       FileName:=exportLoc & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_DATA, _
+                       FileName:=exportLocGbl & PREFIX_TABLE & tableNameStr & FILE_EXT_TABLE_DATA, _
                        HasFieldNames:=True
 End Sub
 
-Private Sub ExportListedTables()
-'Currently takes 16 seconds
+Private Function ExportListedTables() As Integer
+Dim TableCount As Integer
+TableCount = 0
 Set app = Access.Application
 Debug.Print "***** Tables *****"
 'exportLoc = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\src\"
-exportLoc = GetDBFolderNameGFn(CurrentDb) & "\" & GetFSO.GetBaseName(CurrentDb.Name) & "\src\"
-CheckAndBuildFolderGFn (exportLoc)
+'exportLoc = GetDBFolderNameGFn(CurrentDb) & "\" & GetFSO.GetBaseName(CurrentDb.Name) & "\src\"
+CheckAndBuildFolderGFn (exportLocGbl)
 Debug.Print TABLE_LIST_TABLENAME
 app.ExportXML objectType:=acExportTable, _
               DataSource:=TABLE_LIST_TABLENAME, _
-              DataTarget:=exportLoc & TABLE_LIST_FILENAME, _
+              DataTarget:=exportLocGbl & TABLE_LIST_FILENAME, _
               OtherFlags:=acEmbedSchema
-Dim TableList As dao.Recordset
+Dim TableList As DAO.Recordset
 Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenSnapshot)
     If Not TableList.EOF Then
         TableList.MoveFirst
@@ -134,20 +140,24 @@ Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME,
                     If TableList("Tbl_ExportData") Then
                         Debug.Print TableList("Tbl_Name") & " (Combined XML)"
                         ExportTableSchemaAndDataAsXml TableList("Tbl_Name")
+                        TableCount = TableCount + 1
                     Else
                         Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
                         ExportTableSchemaAsXsd TableList("Tbl_Name")
+                        TableCount = TableCount + 1
                     End If
                 Else
                     If TableList("Tbl_ExportData") Then
                         Debug.Print TableList("Tbl_Name") & " (XML Data Only)"
                         ExportTableDataOnlyAsXml TableList("Tbl_Name")
+                        TableCount = TableCount + 1
                     End If
                 End If
             Else
                 If TableList("Tbl_ExportSchema") Then
                     Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
                     ExportTableSchemaAsXsd TableList("Tbl_Name")
+                    TableCount = TableCount + 1
                     If TableList("Tbl_ExportData") Then
                         Debug.Print TableList("Tbl_Name") & " (TXT Data)"
                         ExportTableDataAsTxt TableList("Tbl_Name")
@@ -156,6 +166,7 @@ Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME,
                     If TableList("Tbl_ExportData") Then
                         Debug.Print TableList("Tbl_Name") & " (TXT Data)"
                         ExportTableDataAsTxt TableList("Tbl_Name")
+                        TableCount = TableCount + 1
                     End If
                 End If
             End If
@@ -165,12 +176,13 @@ Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME,
 TableList.Close
 
 Dim exportIniFile As String
-exportIniFile = Dir(exportLoc & "export.ini")
-If exportIniFile <> "" Then Kill exportLoc & exportIniFile
+exportIniFile = Dir(exportLocGbl & "export.ini")
+If exportIniFile <> "" Then Kill exportLocGbl & exportIniFile
 
-End Sub
+ExportListedTables = TableCount
+End Function
 
-Public Sub test()
+Public Sub Test_PrintContainerNames()
 Dim c As Container
 For Each c In CurrentDb.Containers
     Debug.Print c.Name
@@ -220,9 +232,9 @@ End Sub
 'End Sub
 '
 
-Public Sub test_TableDefs()
+Public Sub Test_GetTableDefs()
 Dim td As TableDef
-Dim db As dao.Database
+Dim db As DAO.Database
 Set db = CurrentDb
 Set td = db.TableDefs("FB-NEW_TABLE")
 End Sub
@@ -270,6 +282,135 @@ ErrProc:
 MsgBox Err
 End Function
 
+Public Sub Test_createStubDatabase()
+createStubDatabase CurrentDb, GetFSO.GetParentFolderName(CurrentDb.Name) & "\" & GetFSO.GetBaseName(CurrentDb.Name) & "\"
+End Sub
+
+Private Sub createStubDatabase(wholeDB As DAO.Database, stubDBPath As String, Optional overWrite As Boolean = True)
+' This will most likely only work with .mdbs anyway
+On Error GoTo ErrProc
+
+Dim stubDBFilename As String
+Dim stubTempDBFilename As String
+Dim stubDBPathAndFilename As String
+Dim stubTempDBPathAndFilename As String
+
+Dim acc As Access.Application
+Dim i As Integer
+Dim strName As String
+
+stubDBFilename = GetFSO.GetBaseName(wholeDB.Name) & "_stub." & GetFSO.GetExtensionName(wholeDB.Name)
+stubDBPathAndFilename = stubDBPath & "\" & stubDBFilename
+stubTempDBFilename = GetFSO.GetBaseName(wholeDB.Name) & "_stubTemp." & GetFSO.GetExtensionName(wholeDB.Name)
+stubTempDBPathAndFilename = stubDBPath & "\" & stubTempDBFilename
+
+If FileExistsGFn(stubTempDBPathAndFilename) Then
+    If overWrite Then
+        Kill (stubTempDBPathAndFilename)
+    Else
+    'Do nothing - messagebox maybe
+        Exit Sub
+    End If
+End If
+GetFSO.CopyFile wholeDB.Name, stubTempDBPathAndFilename
+
+'Now remove all database objects from the stub.
+
+Set acc = New Access.Application
+acc.OpenCurrentDatabase stubTempDBPathAndFilename
+ 
+Debug.Print "Deleting Forms"
+For i = acc.CurrentProject.AllForms.Count - 1 To 0 Step -1
+    strName = acc.CurrentProject.AllForms(i).Name
+    Debug.Print strName
+    acc.DoCmd.DeleteObject acForm, strName
+Next i
+ 
+Debug.Print "Deleting Reports"
+For i = acc.CurrentProject.AllReports.Count - 1 To 0 Step -1
+    strName = acc.CurrentProject.AllReports(i).Name
+    Debug.Print strName
+    acc.DoCmd.DeleteObject acReport, strName
+Next i
+ 
+Debug.Print "Deleting Modules"
+For i = acc.CurrentProject.AllModules.Count - 1 To 0 Step -1
+    strName = acc.CurrentProject.AllModules(i).Name
+    Debug.Print strName
+    acc.DoCmd.DeleteObject acModule, strName
+Next i
+
+Debug.Print "Deleting Macros"
+For i = acc.CurrentProject.AllMacros.Count - 1 To 0 Step -1
+    strName = acc.CurrentProject.AllMacros(i).Name
+    Debug.Print strName
+    acc.DoCmd.DeleteObject acMacro, strName
+Next i
+
+Debug.Print "Deleting Queries"
+For i = acc.CurrentData.AllQueries.Count - 1 To 0 Step -1
+    strName = acc.CurrentData.AllQueries(i).Name
+    Debug.Print strName
+    acc.DoCmd.DeleteObject acQuery, strName
+Next i
+
+Debug.Print "Deleting Tables"
+For i = acc.CurrentData.AllTables.Count - 1 To 0 Step -1
+    strName = acc.CurrentData.AllTables(i).Name
+    Debug.Print strName
+    If Left(strName, 4) <> "MSys" Then
+        acc.DoCmd.DeleteObject acTable, strName
+    End If
+Next i
+
+acc.CloseCurrentDatabase
+
+If FileExistsGFn(stubDBPathAndFilename) Then
+    Kill (stubDBPathAndFilename)
+End If
+If (acc.CompactRepair(stubTempDBPathAndFilename, stubDBPathAndFilename)) Then
+    GetFSO.DeleteFile stubTempDBPathAndFilename
+End If
+acc.Quit
+
+Exit Sub
+ErrProc:
+DispErrMsgGSb Error$, "create a stub database"
+
+''for each tabledef
+'Dim objectType
+'Dim objectTypes As New Collection
+'objectTypes.Add "Forms"
+''objectTypes.Add "Classes"
+'objectTypes.Add "Reports"
+'objectTypes.Add "Scripts"
+'objectTypes.Add "Modules"
+'objectTypes.Add "Tables"
+'
+'Dim c As Container
+'Dim d As Document
+'
+'For Each objectType In objectTypes
+'    Debug.Print objectType
+'    Set c = stubDB.Containers(objectType)
+'    For Each d In c.Documents
+'        If (Left(d.Name, 1) <> "~") And (Left(d.Name, 4) <> "MSys") Then
+'            Debug.Print "Deleting: " & d.Name
+'            ' , d.Name
+'        End If
+'    Next d
+'Next objectType
+'
+'Dim i As Integer
+'For i = 0 To stubDB.QueryDefs.Count - 1
+'    'Skip the embedded queries
+'    If Left(stubDB.QueryDefs(i).Name, 1) <> "~" Then
+'        Debug.Print "Exporting Query: " & stubDB.QueryDefs(i).Name
+'    End If
+'Next i
+        
+End Sub
+
 Public Sub test_project()
 Dim db As Database
 Dim myForm As AccessObject
@@ -297,14 +438,8 @@ Next myDoc
 
 End Sub
 
-Public Sub Test_ExportForm()
-Application.SaveAsText acForm, "Copy of MattsVCSFrm", _
-        "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\src\Frm_MattsVCSFrm.frm"
-End Sub
-
-'Takes the exportFilename and exports all objects to files in the given exportLocation
-Public Function ExportDatabaseObjects(exportLocation As String, _
-                                Optional performExport As Boolean = True) As String
+'Exports all objects to files in exportLocGbl
+Public Function ExportDatabaseObjects(Optional performExport As Boolean = True) As String
 On Error GoTo Err_ExportDatabaseObjects
 
 Dim db As Database
@@ -312,11 +447,10 @@ Dim td As TableDef
 Dim d As Document
 Dim c As Container
 Dim i As Integer
-'Dim exportLocation As String
 Dim tableDataInXML As Boolean
 tableDataInXML = False
 
-tableCount = 0
+TableCount = 0
 queryCount = 0
 formCount = 0
 moduleCount = 0
@@ -337,17 +471,12 @@ Set db = app.CurrentDb
 
 StartTimer
 
-'exportLocation = "C:\OPT\TestDBs\Export\" 'Do not forget the closing back slash! ie: C:\Temp\
-If Right(exportLocation, 1) <> "\" Then
-    exportLocation = exportLocation & "\"
-End If
-
 If Not (db Is Nothing) Then
     If processTables Then
         'tableCount = ListTables
-        ExportListedTables
+        TableCount = ExportListedTables()
     End If
-    ExportDatabaseObjects = tableCount & " tables" & vbCrLf
+    ExportDatabaseObjects = TableCount & " tables" & vbCrLf
 
     If processForms Then
         Debug.Print "***** Forms *****"
@@ -355,27 +484,13 @@ If Not (db Is Nothing) Then
         For Each d In c.Documents
             If performExport Then
                 Debug.Print "Exporting Form: " & d.Name
-                app.SaveAsText acForm, d.Name, exportLocation & PREFIX_FORM & d.Name & FILE_EXT_FORM
+                app.SaveAsText acForm, d.Name, exportLocGbl & PREFIX_FORM & d.Name & FILE_EXT_FORM
             End If
             formCount = formCount + 1
             CheckTimer
         Next d
     End If
     ExportDatabaseObjects = ExportDatabaseObjects & formCount & " forms" & vbCrLf
-    
-    If processClasses Then
-        Debug.Print "***** Classes *****"
-        Set c = db.Containers("Classes")
-        For Each d In c.Documents
-            If performExport Then
-                Debug.Print "Exporting Class: " & d.Name
-                app.SaveAsText acReport, d.Name, exportLocation & PREFIX_CLASS & d.Name & FILE_EXT_CLASS
-            End If
-            classCount = classCount + 1
-            CheckTimer
-        Next d
-    End If
-    ExportDatabaseObjects = ExportDatabaseObjects & classCount & " classes" & vbCrLf
     
     'If processPages ...
     'pageCount & " data access pages"
@@ -386,7 +501,7 @@ If Not (db Is Nothing) Then
         For Each d In c.Documents
             If performExport Then
                 Debug.Print "Exporting Report: " & d.Name
-                app.SaveAsText acReport, d.Name, exportLocation & PREFIX_REPORT & d.Name & FILE_EXT_REPORT
+                app.SaveAsText acReport, d.Name, exportLocGbl & PREFIX_REPORT & d.Name & FILE_EXT_REPORT
             End If
             reportCount = reportCount + 1
             CheckTimer
@@ -401,7 +516,7 @@ If Not (db Is Nothing) Then
             If performExport Then
                 Debug.Print "Exporting Macro: " & d.Name
                 app.SaveAsText acMacro, d.Name, _
-                                     exportLocation & PREFIX_MACRO & d.Name & FILE_EXT_MACRO
+                                     exportLocGbl & PREFIX_MACRO & d.Name & FILE_EXT_MACRO
             End If
             macroCount = macroCount + 1
             CheckTimer
@@ -416,7 +531,7 @@ If Not (db Is Nothing) Then
             If performExport Then
                 Debug.Print "Exporting Module: " & d.Name
                 app.SaveAsText acModule, d.Name, _
-                                     exportLocation & PREFIX_MODULE & d.Name & FILE_EXT_MODULE
+                                     exportLocGbl & PREFIX_MODULE & d.Name & FILE_EXT_MODULE
             End If
             moduleCount = moduleCount + 1
             CheckTimer
@@ -432,7 +547,7 @@ If Not (db Is Nothing) Then
                 If performExport Then
                     Debug.Print "Exporting Query: " & db.QueryDefs(i).Name
                     app.SaveAsText acQuery, db.QueryDefs(i).Name, _
-                                         exportLocation & PREFIX_QUERY & db.QueryDefs(i).Name & FILE_EXT_QUERY
+                                         exportLocGbl & PREFIX_QUERY & db.QueryDefs(i).Name & FILE_EXT_QUERY
                 End If
                 queryCount = queryCount + 1
                 CheckTimer
@@ -446,7 +561,7 @@ End If
 Set db = Nothing
 Set c = Nothing
 
-If False Then MsgBox "All database objects have been exported as text and XML files to " & exportLocation & vbCrLf & _
+If False Then MsgBox "All database objects have been exported as text and XML files to " & exportLocGbl & vbCrLf & _
        "Total time taken: " & GetTimeString(CheckTimer), _
        vbInformation
 
@@ -466,8 +581,7 @@ Public Function ImportDatabaseObjects(importFolder As String, _
                                       As String
 On Error GoTo Err_ImportDatabaseObjects
 
-'importFolder = "C:\OPT\TestDBs\Export\" 'Do not forget the closing back slash! ie: C:\Temp\
-
+'Do not forget the closing back slash! ie: C:\Temp\
 If (Right(importFolder, 1) <> "\") Then
     importFolder = importFolder & "\"
 End If
@@ -478,7 +592,7 @@ Dim objectType As String
 Dim objectName As String
 Dim dataFileName As String
 
-tableCount = 0
+TableCount = 0
 queryCount = 0
 formCount = 0
 moduleCount = 0
@@ -498,26 +612,27 @@ origFileName = Dir(importFolder, vbNormal)
 ucFileName = UCase(origFileName)
 
 While ucFileName <> ""
+
     If Right(ucFileName, Len(FILE_EXT_TABLE_COMBINED)) = FILE_EXT_TABLE_COMBINED Then
         '.xml file
         If SADebug Then Debug.Print origFileName & " is a " & FILE_EXT_TABLE_COMBINED & " file"
         If ((Left(ucFileName, Len(PREFIX_TABLE)) = PREFIX_TABLE) And processTables) Then
             '"Tbl_[].xml" file
             If SADebug Then Debug.Print origFileName & " is a combined table file"
-            tableCount = tableCount + 1
+            TableCount = TableCount + 1
             
             If importObjects Then
                 app.ImportXML importFolder & origFileName, acStructureAndData
             End If
-            
         End If
+        
     ElseIf Right(ucFileName, Len(FILE_EXT_TABLE_SCHEMA)) = FILE_EXT_TABLE_SCHEMA Then
         '.xsd file
         If SADebug Then Debug.Print origFileName & " is a " & FILE_EXT_TABLE_SCHEMA & " file"
         If ((Left(ucFileName, Len(PREFIX_TABLE)) = PREFIX_TABLE) And processTables) Then
             '"Tbl_[].xsd" file
             If SADebug Then Debug.Print origFileName & " is a table schema file"
-            tableCount = tableCount + 1
+            TableCount = TableCount + 1
             
             If importObjects Then
                 app.ImportXML importFolder & origFileName, acStructureOnly
@@ -529,11 +644,9 @@ While ucFileName <> ""
                     app.DoCmd.TransferText acImportDelim, , objectName, dataFileName, True
                 End If
             End If
-            
         End If
     
     Else
-    
         If (Right(ucFileName, Len(FILE_EXT_QUERY)) = FILE_EXT_QUERY) And _
                (Left(ucFileName, Len(PREFIX_QUERY)) = PREFIX_QUERY) And _
                processQueries Then
@@ -619,7 +732,7 @@ Wend
 
 '"Statistics for " & importFolder & ":" & vbCrLf & vbCrLf &
 ImportDatabaseObjects = _
-       tableCount & " tables" & vbCrLf & _
+       TableCount & " tables" & vbCrLf & _
        queryCount & " queries" & vbCrLf & _
        formCount & " forms" & vbCrLf & _
        moduleCount & " modules" & vbCrLf & _
@@ -638,7 +751,7 @@ End Function
 
 Public Function TableContainsOleFields(TableName As String) As Boolean
 On Error GoTo ErrProc
-Dim db As dao.Database
+Dim db As DAO.Database
 Dim td As TableDef
 Dim f As Field
 TableContainsOleFields = False
@@ -657,19 +770,29 @@ Resume Next
 End Function
 
 Public Function ExportThisDataBase() As Boolean
+On Error GoTo ErrProc
 
-Dim exportLoc As String
 If Not IsNull(Forms("MattsVCSFrm")) Then
-    exportLoc = Form_MattsVCSFrm.C_SourceDirNxt
+    exportLocGbl = Form_MattsVCSFrm.C_SourceDirNxt
 Else
-    exportLoc = "C:\Documents and Settings\Matt\My Documents\Projects\test"
+    exportLocGbl = DEFAULT_EXPORT_LOC
 End If
+If (Right(exportLocGbl, 1) <> "\") Then
+    exportLocGbl = exportLocGbl & "\"
+End If
+
 ExportThisDataBase = False
 
 Set app = Application
-MsgBox "EXPORTED:" & vbCrLf & ExportDatabaseObjects(exportLoc, True)
+createStubDatabase CurrentDb, GetFSO.GetParentFolderName(exportLocGbl)
+MsgBox "EXPORTED:" & vbCrLf & ExportDatabaseObjects(True)
+CreateShortcut CreateBuildScript(GetFSO.GetParentFolderName(exportLocGbl)), _
+                                 GetFSO.GetFileName(CurrentDb.Name)
 ExportThisDataBase = True
 
+Exit Function
+ErrProc:
+DispErrMsgGSb Error$, "export the database"
 End Function
 
 Public Function ImportThisDataBase() As Boolean
@@ -706,4 +829,68 @@ MsgBox "Code Project Name: " & Application.CodeProject.Name & vbCrLf & _
        "Code Project FullName: " & Application.CodeProject.FullName & vbCrLf & _
        "Count of Modules: " & Application.CodeProject.AllModules.Count
 
+End Function
+
+Private Function CreateBuildScript(pathname As String) As String
+On Error GoTo ErrProc
+Dim scriptFilename As String
+Dim scriptPathAndFilename As String
+Dim scriptStr As String
+
+If (Right(pathname, 1) <> "\") Then pathname = pathname & "\"
+scriptFilename = "Build_Script.vbs"
+scriptPathAndFilename = pathname & scriptFilename
+
+Dim ScriptTblRS As DAO.Recordset
+Set ScriptTblRS = CodeDb.OpenRecordset("SELECT BuildScript FROM __ScriptTbl__", dbOpenSnapshot)
+    If Not ScriptTblRS.EOF Then
+        ScriptTblRS.MoveFirst
+        scriptStr = ScriptTblRS("BuildScript")
+    End If
+ScriptTblRS.Close
+
+If Not IsNull(scriptStr) Then
+    Dim FNum As Integer
+    'Write out file
+    FNum = FreeFile() 'Assign a free file no. to FNum
+    Open scriptPathAndFilename For Output As FNum
+    Print #FNum, scriptStr 'Write the contents of scriptStr to the script file.
+    Close #FNum
+End If
+
+CreateBuildScript = scriptPathAndFilename
+Exit Function
+
+ErrProc:
+CreateBuildScript = ""
+End Function
+
+Public Function Test_CreateBuildScript()
+CreateBuildScript "C:\test"
+End Function
+
+Private Function CreateShortcut(scriptPathAndFilename As String, dbName As String) As String
+Dim Link As Object
+'Dim DesktopPath As String
+Dim scriptPath As String
+scriptPath = GetFSO.GetParentFolderName(scriptPathAndFilename)
+
+'DesktopPath = GetShell.SpecialFolders("Desktop")
+Set Link = GetShell.CreateShortcut(scriptPath & "\MAKE.lnk")
+Link.Arguments = " """ & dbName & """"
+Link.Description = "Shortcut to build " & dbName
+Link.Hotkey = ""
+'Link.IconLocation = ""
+Link.TargetPath = """" & scriptPathAndFilename & """"
+'"C:\Documents and Settings\Matt\My Documents\Projects\MattsVCS-Access\MattsVCS-Access-Addin\AccessVCAddIn\Build_Script.vbs" AccessVCAddin.mdb
+Link.WindowStyle = 1 'Normal Window
+Link.WorkingDirectory = scriptPath
+Link.Save
+
+CreateShortcut = Link.FullName
+
+End Function
+
+Public Function Test_CreateShortcut()
+Debug.Print "Shortcut filename: " & CreateShortcut(CreateBuildScript("C:\test"), "Hello")
 End Function

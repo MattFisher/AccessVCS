@@ -177,9 +177,9 @@ Else
     ' Same size, different timestamps. Bugger.
     ' Open both files for binary access.
     oldFileNumber = FreeFile
-    Open oldFile.Path For Binary Access Read As #oldFileNumber
+    Open oldFile.path For Binary Access Read As #oldFileNumber
     newFileNumber = FreeFile
-    Open newFile.Path For Binary Access Read As #newFileNumber
+    Open newFile.path For Binary Access Read As #newFileNumber
     StPos = 1
     ' Read both files a chunk at a time using the Get statement.
     While oldFileChunk = newFileChunk _
@@ -238,11 +238,11 @@ Public Function GetFSO() As Object
   Set GetFSO = objFSO
 End Function
 
-Public Function GetDBFolderNameGFn(db As dao.Database) As String
+Public Function GetDBFolderNameGFn(db As DAO.Database) As String
 GetDBFolderNameGFn = GetFSO.GetParentFolderName(db.Name)
 End Function
 
-Public Function TableExistsInDbGFn(TableName As String, Optional db As dao.Database) As Boolean
+Public Function TableExistsInDbGFn(TableName As String, Optional db As DAO.Database) As Boolean
 On Error GoTo ErrProc
 If Not IsNull(db) Then
     If db Is Nothing Then
@@ -267,7 +267,7 @@ Debug.Print tableNameStr & " exists in CurrentDb? " & TableExistsInDbGFn(tableNa
 Debug.Print tableNameStr & " exists in CodeDb? " & TableExistsInDbGFn(tableNameStr, CodeDb)
 End Sub
 
-Public Function CountAllDBObjectsGFn(db As dao.Database) As String
+Public Function CountAllDBObjectsGFn(db As DAO.Database) As String
 On Error GoTo ErrProc
 Dim aStr As String
 Dim c As Container
@@ -283,7 +283,7 @@ ErrProc:
     DispErrMsgGSb Error$, "Count the objects in the database " & db.Name
 End Function
 
-Public Function CountDBObjectsOfTypeGFn(db As dao.Database, objectType As String) As Integer
+Public Function CountDBObjectsOfTypeGFn(db As DAO.Database, objectType As String) As Integer
 On Error GoTo ErrProc
 'Dim d As Document
 Dim c As Container

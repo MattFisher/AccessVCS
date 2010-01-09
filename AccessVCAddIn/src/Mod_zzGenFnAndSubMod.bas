@@ -92,7 +92,7 @@ Public Function FileExistsGFn(FileAndPathNameVar As Variant) As Boolean
 On Error GoTo ErrProc
 Dim PathAndFileName As String
 Dim FileName As String
-PathAndFileName = AssignVar2StrGFn(FileAndPathNameVar, "No Director Found", True)
+PathAndFileName = AssignVar2StrGFn(FileAndPathNameVar, "No Directory Found", True)
 If Right(Trim(PathAndFileName), 1) = "\" Then GoTo ErrProc 'Have received a directory
     If Dir(PathAndFileName) <> "" Then
         FileExistsGFn = True
@@ -134,7 +134,7 @@ End Function
 'End Sub
 
 Public Sub SetDBGeneratorGSb(TblName As String, Optional GenValLng As Long = 0)
-Dim QryDef As dao.QueryDef
+Dim QryDef As DAO.QueryDef
 SQLStr = "SET GENERATOR GEN_" & TblName & "_ID TO " & GenValLng & ";"
 Set QryDef = CurrentDb.CreateQueryDef("")
     QryDef.Connect = DSN4TblNameGFn(TblName)
@@ -158,7 +158,7 @@ GoTo ExitProc
 End Sub
 
 Public Function GetFormIDGFn(formName As String) As Long
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT FL_TblID " & _
 "FROM zzHlpFormsLstTbl " & _
 "WHERE FL_Name ='" & formName & "'"
@@ -171,7 +171,7 @@ RecSet.Close
 End Function
 
 Public Function DefaultValGFn(TblNameStr As String, IDFdNameStr As String, IDFdVal As Long, DefFdNameStr As String) As Boolean
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT " & DefFdNameStr & " FROM " & TblNameStr & " " & _
     "WHERE (" & IDFdNameStr & " = " & IDFdVal & ") " & _
     "AND (" & DefFdNameStr & " = -1)"
@@ -243,7 +243,7 @@ Optional GpIDFdName As String = "", Optional GpIDValLng As Long = NoCurrCardIDGb
 '
 Dim WhereClause As String
 Dim OrderByClause As String
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 If GpIDFdName <> "" Then
     WhereClause = "WHERE (" & GpIDFdName & "=" & GpIDValLng & ") "
 End If
@@ -314,7 +314,7 @@ Optional WhereStr4Gp As String = "") As Boolean
 'If there is no GpFdName then the WhereGpStr is set to "".
 'Expects the format of the WhereGpStr to be for example: "MatGp = 'Wood'" or "SerialGp = 1"
 'In this manner we can handle strings or numbers.  We add to this " AND (" & WhereGpStr & ") "
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 Dim WhereStr As String
 Dim N
 'Set up WhereGpStr if it is not set to ""
@@ -482,7 +482,7 @@ Public Function ValUniqueGFn(SearchSqlStr As String) As Boolean
 'This function returns False if it finds that the value being input is the same as the value in another record.
 'If there is a value provided for GpFdName and GpName it will allow identical names in various groups but not in the same group.
 'Execute the query to see if the value exists
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 Set RecSet = CurrentDb.OpenRecordset(SearchSqlStr, dbOpenSnapshot)
     If Not RecSet.EOF Then 'Found a name the same as the one we are trying to add or edit in a different record.
         ValUniqueGFn = False
@@ -551,7 +551,7 @@ End Function
 
 Public Function NoOfRecsInTblGFn(TblName As String, Optional WhereStr = "") As Long
 On Error GoTo ErrProc
-Dim RecSet As dao.Recordset
+Dim RecSet As DAO.Recordset
 SQLStr = "SELECT * FROM " & TblName & " " & WhereStr
 Set RecSet = CurrentDb.OpenRecordset(SQLStr, dbOpenSnapshot)
     If Not RecSet.EOF Then

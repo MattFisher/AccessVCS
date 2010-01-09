@@ -34,4 +34,17 @@
 'Allow initialisation of Git Repo
 'Make Git also commit the stub db?
 'Add button to create Stub DB and remove it from the Export procedures?
-'Include function to create the build script
+'   DONE    Include function to create the build script
+'   DONE    Fix exporting tables to the wrong place
+'Consider what to do when a no-longer existant module is (not) exported
+'Modify export so Git only modified entities are updated
+'Add Fetch/Pull and Push buttons to interface
+'Save and restore relationships
+'Implement Git2Svn functionality
+'Implement notify/select on failed attempt to re-link a table
+'CheckAndBuildFolder on click of export not form opening
+'Implement get/set Options and Startup Properties
+'  db.Containers("Databases").Documents("SummaryInfo").Properties("Title"),"Author","Company","Comments","Subject","Keywords","Manager","Category","Hyperlink base"
+'On completion of build, open newly built db and open MVCS form?
+'Add "Build new Database" button
+'Delete __TABLE_LIST__ on completion of build?
