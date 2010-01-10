@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =308119713
+Checksum =253274952
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
@@ -22,11 +22,11 @@ Begin Form
     GridY =10
     Width =13209
     DatasheetFontHeight =10
-    ItemSuffix =35
+    ItemSuffix =39
     Left =1065
-    Top =105
+    Top =495
     Right =14280
-    Bottom =8940
+    Bottom =9435
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xa87e69fa7798e340
@@ -36,7 +36,7 @@ Begin Form
     End
     NameMap = Begin
         0x0acc0e55000000002711de0961332741b3b860df5449c8f60100000090aad853 ,
-        0xd89de340e0915005150000005400610062006c00650053007500620046007200 ,
+        0xd89de340d000c404020050005400610062006c00650053007500620046007200 ,
         0x6d00000000000000000000000000000000000000000000000c00000003000000 ,
         0x0000000000000000000000000000
     End
@@ -206,7 +206,7 @@ Begin Form
         End
         Begin Section
             CanGrow = NotDefault
-            Height =8844
+            Height =9435
             BackColor =-2147483633
             Name ="Detail"
             GUID = Begin
@@ -291,8 +291,8 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =8955
-                    Top =8160
+                    Left =4535
+                    Top =8163
                     Width =1941
                     Height =576
                     TabIndex =2
@@ -304,7 +304,6 @@ Begin Form
                         0x80808000c0c0c000ff000000c0c0c000ffff00000000ff00c0c0c00000ffff00 ,
                         0xffffff0000000000
                     End
-                    ControlTipText ="Apply Filter"
                     GUID = Begin
                         0x2ed18995f868ba4a98c78ca25d45a43a
                     End
@@ -319,7 +318,6 @@ Begin Form
                     Name ="C_ImportBtn"
                     Caption ="Import Database"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Apply Filter"
                     GUID = Begin
                         0x16c806d1f1da814d8832002b90ae5be2
                     End
@@ -575,17 +573,58 @@ Begin Form
                 End
                 Begin CommandButton
                     OverlapFlags =85
-                    Left =11160
-                    Top =8160
+                    Left =6740
+                    Top =8163
                     Width =1941
                     Height =576
                     TabIndex =10
-                    Name ="CommitBtn"
+                    Name ="C_CommitBtn"
                     Caption ="Commit to Git"
                     OnClick ="[Event Procedure]"
-                    ControlTipText ="Apply Filter"
                     GUID = Begin
                         0xa640ca1677a49c4bb2d033f5a5553ae5
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =2437
+                    Top =8163
+                    Width =1821
+                    Height =576
+                    TabIndex =11
+                    Name ="C_BuildBtn"
+                    Caption ="Build New Copy\015\012of Database"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0xab1b04ac4b4a514182e7c7b5af1c62f1
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =8844
+                    Top =8163
+                    Width =2091
+                    Height =576
+                    TabIndex =12
+                    Name ="C_PushChangesBtn"
+                    Caption ="Push changes to remote repository"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x977d8ab13c969c4e93ce59fa1d95cfee
+                    End
+                End
+                Begin CommandButton
+                    OverlapFlags =85
+                    Left =12018
+                    Top =8163
+                    Width =1035
+                    Height =570
+                    TabIndex =13
+                    Name ="C_CloseBtn"
+                    Caption ="Close Form"
+                    OnClick ="[Event Procedure]"
+                    GUID = Begin
+                        0x839497d066c4e046ad263c9171ff6e21
                     End
                 End
             End
@@ -599,6 +638,40 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
+
+Private Sub BuildBtn_Click()
+On Error GoTo ErrProc
+
+Dim response As Integer
+response = MsgBox("This may overwrite the currently running database," & vbCrLf & _
+                  "including any changes that haven't been exported." & vbCrLf & vbCrLf & _
+                  "Do you want to continue?", _
+                  vbExclamation + vbYesNo + vbDefaultButton2, _
+                  "About to build new database")
+If response = vbYes Then
+    BuildDatabase
+End If
+
+ExitProc:
+Exit Sub
+    
+ErrProc:
+DispErrMsgGSb Error$, "start building a new copy of the database"
+End Sub
+
+Private Sub C_CloseBtn_Click()
+On Error GoTo Err_C_CloseBtn_Click
+
+    DoCmd.Close
+
+Exit_C_CloseBtn_Click:
+    Exit Sub
+
+Err_C_CloseBtn_Click:
+    MsgBox Err.Description
+    Resume Exit_C_CloseBtn_Click
+    
+End Sub
 
 Private Sub C_ExportBtn_Click()
 On Error GoTo ErrProc
@@ -696,6 +769,19 @@ Exit Sub
     
 ErrProc:
 MsgBox Error$
+End Sub
+
+Private Sub C_PushChangesBtn_Click()
+On Error GoTo ErrProc
+
+MsgBox "Not Implemented Yet"
+
+ExitProc:
+Exit Sub
+    
+ErrProc:
+DispErrMsgGSb Error$, "push changes to a remote repository"
+
 End Sub
 
 Private Sub Form_Load()

@@ -148,7 +148,7 @@ End Function
 Public Function FileIsChangedAndNewerGFn(newFile As File, oldFile As File) As Boolean
 On Error GoTo ErrProc
 
-Dim oldFileName As String, newFileName As String
+Dim oldFilename As String, newFilename As String
 Dim oldFileChunk As String, newFileChunk As String
 Dim oldFileNumber As Integer, newFileNumber As Integer
 Dim filesAreDifferent As Boolean
@@ -201,7 +201,7 @@ ExitProc:
     FileIsChangedAndNewerGFn = filesAreDifferent And newFileIsNewer
     Exit Function
 ErrProc:
-
+    DispErrMsgGSb Error$, "compare two files for differences."
 End Function
 
 Private Sub Test_FileIsChangedAndNewerGFn()

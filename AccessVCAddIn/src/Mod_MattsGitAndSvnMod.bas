@@ -40,3 +40,10 @@ ShellStr = """" & TortoiseGitPath & """" & " /command:fetch" & _
 'Debug.Print shellStr
 GetShell.Run ShellStr, vbNormalFocus, True 'Wait for completion
 End Sub
+
+Public Sub PushGitChanges()
+ShellStr = """" & TortoiseGitPath & """" & " /command:commit" & _
+                                           " /path:""" & fileOrFolder & """" & _
+                                           " /closeonend:0"
+GetShell.Run ShellStr, vbNormalFocus, True 'Wait for completion
+End Sub
