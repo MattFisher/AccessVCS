@@ -196,8 +196,6 @@ Set TableList = db.OpenRecordset("SELECT * FROM " & tableListName, dbOpenSnapsho
                 'newTable.RefreshLink
                 'WScript.Echo "Just refreshed link"
                 'newTable.CreateField "TestField"
-			'Somewhere around here we need to check if this fails and provide a method to locate the
-			'missing database (ie FilePicker)
                 db.TableDefs.Append newTable
                 'WScript.Echo "New Table Count: " & db.TableDefs.Count
                 TableCount = TableCount + 1

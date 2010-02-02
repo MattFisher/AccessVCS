@@ -27,7 +27,7 @@ Public Function AssignVar2VarGFn(inVar As Variant) As Variant
 'Removes zero length string condition.
 Dim AssignNullFlg As Boolean
 AssignNullFlg = False
-Select Case VarType(inVar)
+Select Case varType(inVar)
 Case vbString
      AssignNullFlg = ("" = Trim(inVar)) 'This is a condition being evaluated to a boolean
 Case vbCurrency, vbDecimal, vbDouble, vbInteger, vbLong, vbSingle

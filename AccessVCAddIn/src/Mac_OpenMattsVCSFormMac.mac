@@ -1,8 +1,0 @@
-Version =196611
-ColumnsShown =0
-Begin
-    Action ="MsgBox"
-    Argument ="\"This is run from within Matt's Addin\""
-    Argument ="-1"
-    Argument ="4"
-End

@@ -22,12 +22,12 @@ Set db = Access.CurrentDb
 'Use this option if the risk of old versions of TABLE_LIST outweighs
 ' the benefit of being able to customise export options in it.
 'TODO: Change this to depend on a 'Version' Property for the table.
-If Not TableExistsInDbGFn(TABLE_LIST_TABLENAME, db) Then
-    ' Copy "__TABLE_LIST_TEMPLATE__" from codeDB to currentDB
-    DoCmd.TransferDatabase acImport, "Microsoft Access", _
-        CodeDb.Name, acTable, "__TABLE_LIST_TEMPLATE__", _
-        TABLE_LIST_TABLENAME, True
-End If
+'If Not TableExistsInDbGFn(TABLE_LIST_TABLENAME, db) Then
+'    ' Copy "__TABLE_LIST_TEMPLATE__" from codeDB to currentDB
+'    DoCmd.TransferDatabase acImport, "Microsoft Access", _
+'        CodeDb.Name, acTable, "__TABLE_LIST_TEMPLATE__", _
+'        TABLE_LIST_TABLENAME, True
+'End If
 
 'If TableExistsInDbGFn(TABLE_LIST_TABLENAME, db) Then
 '    'DoCmd.DeleteObject acTable, TABLE_LIST_TABLENAME
@@ -38,9 +38,9 @@ End If
 '    TABLE_LIST_TABLENAME, True
 
 
-If resetTableList Then CurrentDb.Execute "DELETE * FROM " & TABLE_LIST_TABLENAME
+If resetTableList Then CodeDb.Execute "DELETE * FROM " & TABLE_LIST_TABLENAME
 
-Set TableList = CurrentDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenTable)
+Set TableList = CodeDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenTable)
     If Not TableList.EOF Then
         TableList.MoveFirst
     End If

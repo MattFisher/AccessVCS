@@ -30,7 +30,8 @@
 'Provide more infomation about what's to be/has been exported.
 '   DONE    Produce VBScript file that will rebuilt the database.
 '   DONE    Export database into folder named for db (to allow multiple dbs in the same place)
-'Decide whether to recurse (ie do workpads/BEs/etc as well)
+'   NO      Decide whether to recurse (ie do workpads/BEs/etc as well)
+'           These are not editable within the DB, therefore should not be exported
 'Allow initialisation of Git Repo?
 'Make Git also commit the stub db?
 'Add button to create Stub DB and remove it from the Export procedures?
@@ -41,11 +42,10 @@
 'Add Fetch/Pull and Push buttons to interface
 'Save and restore relationships
 'Implement Git2Svn functionality
-'Implement notify/select on failed attempt to re-link a table
+'*Implement notify/select on failed attempt to re-link a table
 '   DONE    CheckAndBuildFolder on click of export not form opening
-'Implement get/set Options and Startup Properties
-'  db.Containers("Databases").Documents("SummaryInfo").Properties("Title"),"Author","Company","Comments","Subject","Keywords","Manager","Category","Hyperlink base"
+'*Implement get/set Options and Startup Properties
 'On completion of build, open newly built db and open MVCS form?
 '   DONE    Add "Build new Database" button
-'Delete __TABLE_LIST__ on completion of build? Or leave TABLE_LIST in addin DB permanently?
+'   DONE    Delete __TABLE_LIST__ on completion of build? Or leave TABLE_LIST in addin DB permanently?
 'Saving relationships, options and startup properties may allow us to eliminate the stub database entirely

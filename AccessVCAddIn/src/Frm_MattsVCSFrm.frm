@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =253274952
+Checksum =-210117859
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
@@ -35,8 +35,8 @@ Begin Form
         0x64ec83390813ae44885105a11c919502
     End
     NameMap = Begin
-        0x0acc0e55000000002711de0961332741b3b860df5449c8f60100000090aad853 ,
-        0xd89de340d000c404020050005400610062006c00650053007500620046007200 ,
+        0x0acc0e55000000002711de0961332741b3b860df5449c8f6010000001fb69171 ,
+        0xd9a1e340bcde1300b80b00005400610062006c00650053007500620046007200 ,
         0x6d00000000000000000000000000000000000000000000000c00000003000000 ,
         0x0000000000000000000000000000
     End
@@ -788,9 +788,10 @@ Private Sub Form_Load()
 Dim sourceFolderStr As String
 
 'MsgBox "Listing Tables, CurrentDB: " & Application.CurrentDb.Name
+Set Forms("MattsVCSFrm").TableSubFrmCtl.Form.Recordset = Nothing
 Set Me.TableSubFrmCtl.Form.Recordset = Nothing
 ListTables
-Set Me.TableSubFrmCtl.Form.Recordset = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenDynaset)
+Set Me.TableSubFrmCtl.Form.Recordset = CodeDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenDynaset)
 
 Me.C_ObjectListLbl.Caption = CountAllDBObjectsGFn(CurrentDb)
 CheckForOleFields

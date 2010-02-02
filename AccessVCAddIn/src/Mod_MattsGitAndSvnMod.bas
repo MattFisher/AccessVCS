@@ -41,9 +41,10 @@ ShellStr = """" & TortoiseGitPath & """" & " /command:fetch" & _
 GetShell.Run ShellStr, vbNormalFocus, True 'Wait for completion
 End Sub
 
-Public Sub PushGitChanges()
-ShellStr = """" & TortoiseGitPath & """" & " /command:commit" & _
-                                           " /path:""" & fileOrFolder & """" & _
+'UNTESTED!
+Public Sub PushGitChanges(repoUri As String)
+ShellStr = """" & TortoiseGitPath & """" & " /command:push" & _
+                                           " /path:""" & repoUri & """" & _
                                            " /closeonend:0"
 GetShell.Run ShellStr, vbNormalFocus, True 'Wait for completion
 End Sub

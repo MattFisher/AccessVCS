@@ -60,10 +60,11 @@ Const Linked = 1
 Dim app As Access.Application
 Const SADebug As Boolean = True
 
-Dim TableCount, queryCount, formCount, moduleCount As Integer
-Dim macroCount, reportCount, pageCount, classCount As Integer
-Dim processTables, processQueries, processForms, processModules As Boolean
-Dim processMacros, processReports, processPages, processClasses As Boolean
+Dim TableCount As Integer, queryCount As Integer, formCount As Integer, moduleCount As Integer
+Dim macroCount As Integer, reportCount As Integer, pageCount As Integer, classCount As Integer
+Dim processTables As Boolean, processQueries As Boolean, processForms As Boolean, processModules As Boolean
+Dim processMacros As Boolean, processReports As Boolean, processPages As Boolean, processClasses As Boolean
+Dim processProperties As Boolean, processOptions As Boolean
 
 Private Sub ExportForm(formName As String)
 Set app = Access.Application
@@ -117,6 +118,32 @@ app.DoCmd.TransferText TransferType:=acExportDelim, _
                        HasFieldNames:=True
 End Sub
 
+Private Sub ExportSpecialTable(tableNameStr As String, exportLoc As String)
+' Copy special table (TABLE_LIST_TABLENAME or PROPERTY_LIST_TABLENAME) from codeDB to currentDB
+Dim GUTableNameStr As String
+GUTableNameStr = tableNameStr & Format(Now(), "yyyyMMddhhmmss")
+DoCmd.TransferDatabase acImport, "Microsoft Access", _
+    CodeDb.Name, acTable, tableNameStr, GUTableNameStr, False
+' Export the table to an XML File
+app.ExportXML objectType:=acExportTable, _
+              DataSource:=GUTableNameStr, _
+              DataTarget:=exportLoc & tableNameStr & ".xml", _
+              OtherFlags:=acEmbedSchema
+' Delete the table again
+Dim attemptCount As Integer
+On Error Resume Next
+DoCmd.DeleteObject acTable, GUTableNameStr
+While TableExistsInDbGFn(GUTableNameStr)
+    attemptCount = attemptCount + 1
+    If (attemptCount >= 100) Then
+        MsgBox "Can't deleted the table " & GUTableNameStr & ", and I've tried 100 times!"
+        Exit Sub
+    End If
+    Sleep (100)
+    DoCmd.DeleteObject acTable, GUTableNameStr
+Wend
+End Sub
+
 Private Function ExportListedTables(exportLoc As String) As Integer
 Dim TableCount As Integer
 TableCount = 0
@@ -127,10 +154,8 @@ Debug.Print "***** Tables *****"
 If (Right(exportLoc, 1) <> "\") Then exportLoc = exportLoc & "\"
 CheckAndBuildFolderGFn (exportLoc)
 Debug.Print TABLE_LIST_TABLENAME
-app.ExportXML objectType:=acExportTable, _
-              DataSource:=TABLE_LIST_TABLENAME, _
-              DataTarget:=exportLoc & TABLE_LIST_FILENAME, _
-              OtherFlags:=acEmbedSchema
+ExportSpecialTable TABLE_LIST_TABLENAME, exportLoc
+
 Dim TableList As DAO.Recordset
 Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenSnapshot)
     If Not TableList.EOF Then
@@ -469,12 +494,20 @@ processModules = True
 processMacros = True
 processReports = True
 processPages = True
+processProperties = True
+processOptions = True
 
 Set db = app.CurrentDb
 
 StartTimer
 
 If Not (db Is Nothing) Then
+    If processProperties Then
+        ListAllProperties
+        If processOptions Then ListAllOptions
+        ExportSpecialTable PROPERTY_LIST_TABLENAME, exportLoc
+    End If
+    
     If processTables Then
         'tableCount = ListTables
         TableCount = ExportListedTables(exportLoc)
@@ -636,7 +669,8 @@ For Each tempFilename In newFileList
 
 Next tempFilename
 
-fso.DeleteFolder srcFolder & TempFolder
+Close 'In case the copying leaves any files open
+DeleteFolderIfThereGSb srcFolder & TempFolder
 
 Debug.Print "Comparisons complete at " & Now() & "!"
 ExportChangedItems = resultStr
@@ -1009,7 +1043,7 @@ Link.Arguments = " """ & dbName & """"
 Link.Description = "Shortcut to build " & dbName
 Link.Hotkey = ""
 'Link.IconLocation = ""
-Link.TargetPath = """" & scriptFilename & """"
+Link.TargetPath = """" & scriptPathAndFilename & """"
 '"C:\Documents and Settings\Matt\My Documents\Projects\MattsVCS-Access\MattsVCS-Access-Addin\AccessVCAddIn\Build_Script.vbs" AccessVCAddin.mdb
 Link.WindowStyle = 1 'Normal Window
 Link.WorkingDirectory = scriptPath
