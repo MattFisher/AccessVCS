@@ -1,1 +1,7 @@
 "Tbl_ID","Tbl_Name","Tbl_SourceTableName","Tbl_Connect","Tbl_ExportSchema","Tbl_ExportData","Tbl_DispType","Tbl_Attributes","Tbl_System","Tbl_Hidden","Tbl_AttachedTable","Tbl_AttachedODBC","Tbl_AttachSavePWD","Tbl_AttachExclusive","Tbl_ContainsBinary"
+13,"__PROPERTIES__BE","","",1,1,"Local",0,0,0,0,0,0,0,1
+14,"__REFERENCES__BE","","",1,1,"Local",0,0,0,0,0,0,0,0
+15,"__RELATIONS__BE","","",1,1,"Local",0,0,0,0,0,0,0,0
+16,"__ScriptTbl__","","",1,1,"Local",0,0,0,0,0,0,0,0
+17,"__TABLES__BE","","",1,1,"Local",0,0,0,0,0,0,0,0
+18,"USysRegInfo","","",1,1,"Local",0,0,0,0,0,0,0,0

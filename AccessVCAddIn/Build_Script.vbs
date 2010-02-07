@@ -147,7 +147,7 @@ Function importModulesTxt(sMDBFilename, sImportpath)
         RestoreReferences oApplication, newDb
         ' Delete __REFERENCES__ table
         'WScript.echo "Deleting References table!"
-        oApplication.DoCmd.DeleteObject acTable, referencesTableName
+        deleteTable oApplication, newDb, referencesTableName
     end if
     
     ' Import __PROPERTIES__ table
@@ -157,7 +157,7 @@ Function importModulesTxt(sMDBFilename, sImportpath)
         RestoreAllProperties newDb
         ' Delete __PROPERTIES__ table
         'WScript.echo "Deleting Properties table!"
-        oApplication.DoCmd.DeleteObject acTable, propertiesTableName
+        deleteTable oApplication, newDb, propertiesTableName
     end if
     
     ' Import __TABLES__ table
@@ -170,9 +170,9 @@ Function importModulesTxt(sMDBFilename, sImportpath)
         'WScript.echo "Relinked " & numRelinkedTables & " tables"
         ' Delete __TABLES__ table
         'WScript.echo "Deleting TableList table!"
-        oApplication.DoCmd.DeleteObject acTable, tableListTableName
+        deleteTable oApplication, newDb, tableListTableName
     end if
-
+    
     ' load each file from the import path into the stub
     Dim myFile, objectname, objecttype
     for each myFile in folder.Files
@@ -182,6 +182,7 @@ Function importModulesTxt(sMDBFilename, sImportpath)
         
         if (objectName = tableListTableName) or _
            (objectName = propertiesTableName) or _
+           (objectName = referencesTableName) or _
            (objectName = relationsTableName) then
            'Ignore file.
            'Wscript.echo "Ignoring " & objectName
@@ -226,21 +227,43 @@ Function importModulesTxt(sMDBFilename, sImportpath)
         'WScript.echo "Created " & numRelations & " relations"
         ' Delete __RELATIONS__ table
         'WScript.echo "Deleting Relationships table!"
-        oApplication.DoCmd.DeleteObject acTable, relationsTableName
+        deleteTable oApplication, newDb, relationsTableName
     end if
     
     oApplication.Visible = false
     oApplication.RunCommand acCmdCompileAndSaveAllModules
     oApplication.Visible = false
     oApplication.RunCommand acCmdCompactDatabase
-    oApplication.Visible = false
-    oApplication.Quit
-    set oApplication = Nothing
+    oApplication.Visible = True
+    'oApplication.Quit
+    'set oApplication = Nothing
+End Function
+
+Private Function deleteTable(app, db, tableNameToDelete)
+    db.TableDefs.Refresh
+    deleteTable = False
+    Dim attemptsLeft
+    attemptsLeft = 20
+    On Error Resume Next
+    Do While (attemptsLeft > 0)
+        'WScript.echo "About to check if " & tableNameToDelete & " exists"
+        If (db.TableDefs(tableNameToDelete).Name <> tableNameToDelete) Then
+            'Error Thrown - Table doesn't exist! Awesome!
+            'WScript.echo "It worked!"
+            attemptsLeft = -1
+            deleteTable = True
+        Else
+            'WScript.echo "About to try to delete " & tableNameToDelete
+            attemptsLeft = attemptsLeft - 1
+            app.DoCmd.DeleteObject acTable, tableNameToDelete
+        End If
+    Loop
 End Function
 
 Private Function getObjectName(sFileBaseName)
     if (sFileBaseName <> tableListTableName) and _
        (sFileBaseName <> propertiesTableName) and _
+       (sFileBaseName <> referencesTableName) and _
        (sFileBaseName <> relationsTableName) then
         getObjectName = mid(sFileBaseName, filenamePrefixLength + 1)
     else

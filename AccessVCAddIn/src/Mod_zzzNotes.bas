@@ -26,28 +26,31 @@
             
 'TODO:
 'Hook up svn/git radio buttons
-'Get rid of current debug msgboxes
+'   DONE    Get rid of current debug msgboxes
 'Provide more infomation about what's to be/has been exported.
 '   DONE    Produce VBScript file that will rebuilt the database.
 '   DONE    Export database into folder named for db (to allow multiple dbs in the same place)
 '   NO      Decide whether to recurse (ie do workpads/BEs/etc as well)
 '           These are not editable within the DB, therefore should not be exported
 'Allow initialisation of Git Repo?
-'Make Git also commit the stub db?
-'Add button to create Stub DB and remove it from the Export procedures?
+'   NO      Make Git also commit the stub db?
+'           Stub DB removed entirely
+'   NO      Add button to create Stub DB and remove it from the Export procedures?
+'           Stub DB removed entirely
 '   DONE    Include function to create the build script
 '   DONE    Fix exporting tables to the wrong place
 '   DONE    Consider what to do when a no-longer existant module is (not) exported
 '   DONE    Modify export so Git only modified entities are updated
 'Add Fetch/Pull and Push buttons to interface
-'Save and restore relationships
+'   DONE    Save and restore relationships
 'Implement Git2Svn functionality
-'*Implement notify/select on failed attempt to re-link a table
+'   DONE    Implement notify/select on failed attempt to re-link a table
 '   DONE    CheckAndBuildFolder on click of export not form opening
-'*Implement get/set Options and Startup Properties
+'   DONE    Implement get/set Options and Startup Properties
 'On completion of build, open newly built db and open MVCS form?
 '   DONE    Add "Build new Database" button
 '   DONE    Delete __TABLE_LIST__ on completion of build? Or leave TABLE_LIST in addin DB permanently?
-'Saving relationships, options and startup properties may allow us to eliminate the stub database entirely
-'Import properties on MAKE - do it FIRST so you can delete the table afterwards.
-'Reconsider placement of __TABLE_LIST__ again! (It's needed for re-linking tables)
+'   DONE    Saving relationships, options and startup properties may allow us to eliminate the stub database entirely
+'   DONE    Import properties on MAKE - do it FIRST so you can delete the table afterwards.
+'   DONE    Reconsider placement of __TABLE_LIST__ again! (It's needed for re-linking tables)
+'Make Git Commit MAKE file, build script

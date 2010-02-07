@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =202895964
+Checksum =233073993
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
@@ -26,7 +26,7 @@ Begin Form
     Left =780
     Top =825
     Right =13995
-    Bottom =9765
+    Bottom =9735
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xa87e69fa7798e340
@@ -35,8 +35,8 @@ Begin Form
         0x64ec83390813ae44885105a11c919502
     End
     NameMap = Begin
-        0x0acc0e55000000002711de0961332741b3b860df5449c8f6010000001676c8ae ,
-        0x15a3e3406109917c08062e025400610062006c00650053007500620046007200 ,
+        0x0acc0e55000000002711de0961332741b3b860df5449c8f601000000cc51f772 ,
+        0x17a3e340000000001cb313005400610062006c00650053007500620046007200 ,
         0x6d00000000000000000000000000000000000000000000000c00000003000000 ,
         0x0000000000000000000000000000
     End
@@ -689,7 +689,8 @@ End Sub
 Private Sub C_ImportBtn_Click()
 On Error GoTo ErrProc
 
-ImportThisDataBase
+MsgBox "Disabled - Run the MAKE file instead."
+'ImportThisDataBase
 
 ExitProc:
 Exit Sub
