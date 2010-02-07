@@ -9,10 +9,13 @@ Dim strFilePath, strDestination, strAppDataPath
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 
 strFilePath = ".\AccessVCAddIn.mdb"
-'TODO: Change this to look up the current user's profile.
-strAppDataPath = "C:\Documents and Settings\Matt\"
-'strAppDataPath = "H:\profile\"
-strDestination = strAppDataPath & "Application Data\Microsoft\AddIns\AccessVCAddIn.mda"
+
+Const APPLICATION_DATA = &H1a&
+Dim objShell, objFolder
+Set objShell = CreateObject("Shell.Application")
+Set objFolder = objShell.Namespace(APPLICATION_DATA)
+strAppDataPath = objFolder.Self.Path
+strDestination = strAppDataPath & "\Microsoft\AddIns\AccessVCAddIn.mda"
 
 if objFSO.FileExists(strFilePath) then
 	if objFSO.FileExists(strDestination) then
