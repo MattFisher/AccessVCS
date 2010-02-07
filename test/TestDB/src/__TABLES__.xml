@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+<xsd:schema>
+<xsd:element name="dataroot">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="__TABLES__" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="generated" type="xsd:dateTime"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="__TABLES__">
+<xsd:annotation>
+<xsd:appinfo>
+<od:index index-name="TableID" index-key="Tbl_ID " primary="no" unique="no" clustered="no"/>
+</xsd:appinfo>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Tbl_ID" minOccurs="1" od:jetType="autonumber" od:sqlSType="int" od:autoUnique="yes" od:nonNullable="yes" type="xsd:int"/>
+<xsd:element name="Tbl_Name" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Tbl_SourceTableName" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Tbl_Connect" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Tbl_ExportSchema" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_ExportData" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_DispType" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="50"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Tbl_Attributes" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"/>
+<xsd:element name="Tbl_System" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_Hidden" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_AttachedTable" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_AttachedODBC" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_AttachSavePWD" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_AttachExclusive" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="Tbl_ContainsBinary" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-07T16:43:56">
+<__TABLES__>
+<Tbl_ID>1</Tbl_ID>
+<Tbl_Name>FB-NEW_TABLE</Tbl_Name>
+<Tbl_SourceTableName>NEW_TABLE</Tbl_SourceTableName>
+<Tbl_Connect>ODBC;DSN=FB_TEST_DB;Driver=Firebird/InterBase(r) driver;Dbname=C:\Documents and Settings\Matt\My Documents\Projects\FB_TEST_DB.FDB;CHARSET=ASCII;</Tbl_Connect>
+<Tbl_ExportSchema>0</Tbl_ExportSchema>
+<Tbl_ExportData>0</Tbl_ExportData>
+<Tbl_DispType>ODBC</Tbl_DispType>
+<Tbl_Attributes>536870912</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>1</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>2</Tbl_ID>
+<Tbl_Name>Tasks</Tbl_Name>
+<Tbl_SourceTableName></Tbl_SourceTableName>
+<Tbl_Connect></Tbl_Connect>
+<Tbl_ExportSchema>1</Tbl_ExportSchema>
+<Tbl_ExportData>1</Tbl_ExportData>
+<Tbl_DispType>Local</Tbl_DispType>
+<Tbl_Attributes>0</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>3</Tbl_ID>
+<Tbl_Name>TaskTypes</Tbl_Name>
+<Tbl_SourceTableName></Tbl_SourceTableName>
+<Tbl_Connect></Tbl_Connect>
+<Tbl_ExportSchema>1</Tbl_ExportSchema>
+<Tbl_ExportData>1</Tbl_ExportData>
+<Tbl_DispType>Local</Tbl_DispType>
+<Tbl_Attributes>0</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>4</Tbl_ID>
+<Tbl_Name>TestTbl</Tbl_Name>
+<Tbl_SourceTableName>TestTbl</Tbl_SourceTableName>
+<Tbl_Connect>;DATABASE=C:\Documents and Settings\Matt\My Documents\Projects\MattsVCS-Access\MattsVCS-Access-Addin\test\AnotherTestDB.mdb</Tbl_Connect>
+<Tbl_ExportSchema>0</Tbl_ExportSchema>
+<Tbl_ExportData>0</Tbl_ExportData>
+<Tbl_DispType>Linked</Tbl_DispType>
+<Tbl_Attributes>1073741824</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>1</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+</dataroot>
+</root>

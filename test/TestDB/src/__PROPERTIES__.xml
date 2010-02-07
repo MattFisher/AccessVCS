@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+<xsd:schema>
+<xsd:element name="dataroot">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="__PROPERTIES__" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="generated" type="xsd:dateTime"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="__PROPERTIES__">
+<xsd:annotation>
+<xsd:appinfo>
+<od:index index-name="PropValueGUID" index-key="PropValueGUID " primary="no" unique="no" clustered="no"/>
+</xsd:appinfo>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="PropCollection" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropName" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropType" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"/>
+<xsd:element name="PropValueBinary" minOccurs="0" od:jetType="oleobject" od:sqlSType="image">
+<xsd:simpleType>
+<xsd:restriction base="xsd:base64Binary">
+<xsd:maxLength value="1476395008"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueByte" minOccurs="0" od:jetType="oleobject" od:sqlSType="image">
+<xsd:simpleType>
+<xsd:restriction base="xsd:base64Binary">
+<xsd:maxLength value="1476395008"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueCurrency" minOccurs="0" od:jetType="currency" od:sqlSType="money" type="xsd:double"/>
+<xsd:element name="PropValueText" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueInteger" minOccurs="0" od:jetType="integer" od:sqlSType="smallint" type="xsd:short"/>
+<xsd:element name="PropValueBoolean" minOccurs="1" od:jetType="yesno" od:sqlSType="bit" od:nonNullable="yes" type="xsd:boolean"/>
+<xsd:element name="PropValueDate" minOccurs="0" od:jetType="datetime" od:sqlSType="datetime" type="xsd:dateTime"/>
+<xsd:element name="PropValueDouble" minOccurs="0" od:jetType="double" od:sqlSType="float" type="xsd:double"/>
+<xsd:element name="PropValueGUID" minOccurs="0" od:jetType="replicationid" od:sqlSType="uniqueidentifier">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="38"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueLong" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"/>
+<xsd:element name="PropValueLongBinary" minOccurs="0" od:jetType="oleobject" od:sqlSType="image">
+<xsd:simpleType>
+<xsd:restriction base="xsd:base64Binary">
+<xsd:maxLength value="1476395008"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueMemo" minOccurs="0" od:jetType="memo" od:sqlSType="ntext">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="536870910"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PropValueSingle" minOccurs="0" od:jetType="single" od:sqlSType="real" type="xsd:float"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-07T16:43:39">
+<__PROPERTIES__>
+<PropCollection>SummaryInfo</PropCollection>
+<PropName>Title</PropName>
+<PropType>10</PropType>
+<PropValueText>VCS Test DB</PropValueText>
+<PropValueBoolean>0</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>SummaryInfo</PropCollection>
+<PropName>Author</PropName>
+<PropType>10</PropType>
+<PropValueText>Matt Fisher</PropValueText>
+<PropValueBoolean>0</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>SummaryInfo</PropCollection>
+<PropName>Company</PropName>
+<PropType>10</PropType>
+<PropValueText>Evolver Systems</PropValueText>
+<PropValueBoolean>0</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AppTitle</PropName>
+<PropType>10</PropType>
+<PropValueText>VCS Test DB</PropValueText>
+<PropValueBoolean>0</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>StartUpShowDBWindow</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>StartUpShowStatusBar</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AllowFullMenus</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AllowShortcutMenus</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AllowBuiltInToolbars</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AllowToolbarChanges</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+<__PROPERTIES__>
+<PropCollection>StartupProperties</PropCollection>
+<PropName>AllowSpecialKeys</PropName>
+<PropType>1</PropType>
+<PropValueBoolean>1</PropValueBoolean>
+</__PROPERTIES__>
+</dataroot>
+</root>
