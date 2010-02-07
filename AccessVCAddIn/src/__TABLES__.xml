@@ -4,12 +4,12 @@
 <xsd:element name="dataroot">
 <xsd:complexType>
 <xsd:sequence>
-<xsd:element ref="__TABLE_LIST__20100202221201" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element ref="__TABLES__" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
 <xsd:attribute name="generated" type="xsd:dateTime"/>
 </xsd:complexType>
 </xsd:element>
-<xsd:element name="__TABLE_LIST__20100202221201">
+<xsd:element name="__TABLES__">
 <xsd:annotation>
 <xsd:appinfo>
 <od:index index-name="TableID" index-key="Tbl_ID " primary="no" unique="no" clustered="no"/>
@@ -60,10 +60,10 @@
 </xsd:complexType>
 </xsd:element>
 </xsd:schema>
-<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-02T22:12:01">
-<__TABLE_LIST__20100202221201>
-<Tbl_ID>9</Tbl_ID>
-<Tbl_Name>__PROPERTIES__</Tbl_Name>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-07T16:36:34">
+<__TABLES__>
+<Tbl_ID>1</Tbl_ID>
+<Tbl_Name>__PROPERTIES__BE</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
 <Tbl_ExportSchema>1</Tbl_ExportSchema>
@@ -77,9 +77,43 @@
 <Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
 <Tbl_AttachExclusive>0</Tbl_AttachExclusive>
 <Tbl_ContainsBinary>1</Tbl_ContainsBinary>
-</__TABLE_LIST__20100202221201>
-<__TABLE_LIST__20100202221201>
-<Tbl_ID>10</Tbl_ID>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>2</Tbl_ID>
+<Tbl_Name>__REFERENCES__BE</Tbl_Name>
+<Tbl_SourceTableName></Tbl_SourceTableName>
+<Tbl_Connect></Tbl_Connect>
+<Tbl_ExportSchema>1</Tbl_ExportSchema>
+<Tbl_ExportData>1</Tbl_ExportData>
+<Tbl_DispType>Local</Tbl_DispType>
+<Tbl_Attributes>0</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>3</Tbl_ID>
+<Tbl_Name>__RELATIONS__BE</Tbl_Name>
+<Tbl_SourceTableName></Tbl_SourceTableName>
+<Tbl_Connect></Tbl_Connect>
+<Tbl_ExportSchema>1</Tbl_ExportSchema>
+<Tbl_ExportData>1</Tbl_ExportData>
+<Tbl_DispType>Local</Tbl_DispType>
+<Tbl_Attributes>0</Tbl_Attributes>
+<Tbl_System>0</Tbl_System>
+<Tbl_Hidden>0</Tbl_Hidden>
+<Tbl_AttachedTable>0</Tbl_AttachedTable>
+<Tbl_AttachedODBC>0</Tbl_AttachedODBC>
+<Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
+<Tbl_AttachExclusive>0</Tbl_AttachExclusive>
+<Tbl_ContainsBinary>0</Tbl_ContainsBinary>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>4</Tbl_ID>
 <Tbl_Name>__ScriptTbl__</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -94,10 +128,10 @@
 <Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
 <Tbl_AttachExclusive>0</Tbl_AttachExclusive>
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
-</__TABLE_LIST__20100202221201>
-<__TABLE_LIST__20100202221201>
-<Tbl_ID>11</Tbl_ID>
-<Tbl_Name>__TABLE_LIST_TEMPLATE__</Tbl_Name>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>5</Tbl_ID>
+<Tbl_Name>__TABLES__BE</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
 <Tbl_ExportSchema>1</Tbl_ExportSchema>
@@ -111,9 +145,9 @@
 <Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
 <Tbl_AttachExclusive>0</Tbl_AttachExclusive>
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
-</__TABLE_LIST__20100202221201>
-<__TABLE_LIST__20100202221201>
-<Tbl_ID>12</Tbl_ID>
+</__TABLES__>
+<__TABLES__>
+<Tbl_ID>6</Tbl_ID>
 <Tbl_Name>USysRegInfo</Tbl_Name>
 <Tbl_SourceTableName></Tbl_SourceTableName>
 <Tbl_Connect></Tbl_Connect>
@@ -128,6 +162,6 @@
 <Tbl_AttachSavePWD>0</Tbl_AttachSavePWD>
 <Tbl_AttachExclusive>0</Tbl_AttachExclusive>
 <Tbl_ContainsBinary>0</Tbl_ContainsBinary>
-</__TABLE_LIST__20100202221201>
+</__TABLES__>
 </dataroot>
 </root>

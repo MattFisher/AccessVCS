@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:od="urn:schemas-microsoft-com:officedata">
+<xsd:schema>
+<xsd:element name="dataroot">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="__REFERENCES__" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="generated" type="xsd:dateTime"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="__REFERENCES__">
+<xsd:annotation>
+<xsd:appinfo>
+<od:index index-name="Ref_GUID" index-key="Ref_GUID " primary="no" unique="no" clustered="no"/>
+</xsd:appinfo>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Ref_Name" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="64"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Ref_GUID" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Ref_Major" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"/>
+<xsd:element name="Ref_Minor" minOccurs="0" od:jetType="longinteger" od:sqlSType="int" type="xsd:int"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-07T16:36:34">
+<__REFERENCES__>
+<Ref_Name>VBA</Ref_Name>
+<Ref_GUID>{000204EF-0000-0000-C000-000000000046}</Ref_GUID>
+<Ref_Major>4</Ref_Major>
+<Ref_Minor>0</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>Access</Ref_Name>
+<Ref_GUID>{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}</Ref_GUID>
+<Ref_Major>9</Ref_Major>
+<Ref_Minor>0</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>stdole</Ref_Name>
+<Ref_GUID>{00020430-0000-0000-C000-000000000046}</Ref_GUID>
+<Ref_Major>2</Ref_Major>
+<Ref_Minor>0</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>DAO</Ref_Name>
+<Ref_GUID>{00025E01-0000-0000-C000-000000000046}</Ref_GUID>
+<Ref_Major>5</Ref_Major>
+<Ref_Minor>0</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>ADODB</Ref_Name>
+<Ref_GUID>{00000201-0000-0010-8000-00AA006D2EA4}</Ref_GUID>
+<Ref_Major>2</Ref_Major>
+<Ref_Minor>1</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>Office</Ref_Name>
+<Ref_GUID>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Ref_GUID>
+<Ref_Major>2</Ref_Major>
+<Ref_Minor>4</Ref_Minor>
+</__REFERENCES__>
+<__REFERENCES__>
+<Ref_Name>IWshRuntimeLibrary</Ref_Name>
+<Ref_GUID>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Ref_GUID>
+<Ref_Major>1</Ref_Major>
+<Ref_Minor>0</Ref_Minor>
+</__REFERENCES__>
+</dataroot>
+</root>

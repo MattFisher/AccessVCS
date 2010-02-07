@@ -1,7 +1,8 @@
 Option Compare Database
 Option Explicit
 
-Public Const PROPERTY_LIST_TABLENAME As String = "__PROPERTIES__"
+Public Const PROPERTY_LIST_TABLENAME As String = "__PROPERTIES__BE"
+Public Const PROPERTY_LIST_FILENAME As String = "__PROPERTIES__.xml"
 'Those are underscores
 
 'Properties are associated with a database.
@@ -99,9 +100,9 @@ Set propertyCollection = getSummaryPropertyCollection()
 
 Set db = Access.CurrentDb
 
-CodeDb.Execute "DELETE * FROM " & PROPERTY_LIST_TABLENAME 'This breaks. TODO: Fix it.
+CodeDb.Execute "DELETE * FROM " & PROPERTY_LIST_TABLENAME
 
-Set PropList = CodeDb.OpenRecordset(PROPERTY_LIST_TABLENAME, dbOpenTable)
+Set PropList = CodeDb.OpenRecordset(PROPERTY_LIST_TABLENAME, dbOpenDynaset)
     If Not PropList.EOF Then
         PropList.MoveFirst
     End If
@@ -136,6 +137,7 @@ Dim db As Database
 Dim obj As Object
 Dim c As Container
 Dim PropList As DAO.Recordset
+Dim SQLStr As String
 
 Dim propertyValue As Variant
 Dim propertyCount As Integer
@@ -147,7 +149,7 @@ Select Case collectionName
         Set c = db.Containers("Databases")
         Set obj = c.Documents("SummaryInfo")
     Case "StartupProperties"
-        Set obj = d
+        Set obj = db
 End Select
 
 SQLStr = "SELECT * FROM " & PROPERTY_LIST_TABLENAME & _
@@ -205,7 +207,7 @@ Err_Property:
     ' Create property, set its value, and append it to the
     ' Properties collection.
         Set prpNew = objParent.CreateProperty(strName, _
-            propType, varValue)
+            lngType, varValue)
         objParent.Properties.Append prpNew
         Resume Next
     Else
@@ -246,7 +248,7 @@ Set optionCollection = getOptionCollection()
 
 'Set db = Access.CurrentDb
 
-Set OptionList = CodeDb.OpenRecordset(PROPERTY_LIST_TABLENAME, dbOpenTable)
+Set OptionList = CodeDb.OpenRecordset(PROPERTY_LIST_TABLENAME, dbOpenDynaset)
     If Not OptionList.EOF Then
         OptionList.MoveLast
     End If
@@ -412,3 +414,19 @@ Dim options As New Collection '(All strings)
 Set getOptionCollection = options
 
 End Function
+
+Public Sub test_show_dbConsts()
+Debug.Print dbBoolean '1
+Debug.Print dbByte '2
+Debug.Print dbInteger '3
+Debug.Print dbLong '4
+Debug.Print dbCurrency '5
+Debug.Print dbSingle '6
+Debug.Print dbDouble '7
+Debug.Print dbDate '8
+Debug.Print dbBinary '9
+Debug.Print dbText '10
+Debug.Print dbLongBinary '11
+Debug.Print dbMemo '12
+Debug.Print dbGUID '15
+End Sub

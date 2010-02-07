@@ -4,12 +4,12 @@
 <xsd:element name="dataroot">
 <xsd:complexType>
 <xsd:sequence>
-<xsd:element ref="__PROPERTIES__20100202221100" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element ref="__PROPERTIES__" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
 <xsd:attribute name="generated" type="xsd:dateTime"/>
 </xsd:complexType>
 </xsd:element>
-<xsd:element name="__PROPERTIES__20100202221100">
+<xsd:element name="__PROPERTIES__">
 <xsd:annotation>
 <xsd:appinfo>
 <od:index index-name="PropValueGUID" index-key="PropValueGUID " primary="no" unique="no" clustered="no"/>
@@ -85,930 +85,125 @@
 </xsd:complexType>
 </xsd:element>
 </xsd:schema>
-<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-02T22:11:42">
-<__PROPERTIES__20100202221100>
+<dataroot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" generated="2010-02-07T16:36:34">
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Title</PropName>
 <PropType>10</PropType>
 <PropValueText>Matt&apos;s Access Version Control AddIn</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Author</PropName>
 <PropType>10</PropType>
 <PropValueText>Matt Fisher</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Company</PropName>
 <PropType>10</PropType>
 <PropValueText>Evolver Systems Pty Ltd</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Comments</PropName>
 <PropType>10</PropType>
 <PropValueText>Allows the use of Subversion and Git source control systems with MS Access</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Subject</PropName>
 <PropType>10</PropType>
 <PropValueText>Subject</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Keywords</PropName>
 <PropType>10</PropType>
 <PropValueText>Keywords</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Manager</PropName>
 <PropType>10</PropType>
 <PropValueText>Manager</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Category</PropName>
 <PropType>10</PropType>
 <PropValueText>Category</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>SummaryInfo</PropCollection>
 <PropName>Hyperlink base</PropName>
 <PropType>10</PropType>
 <PropValueText>Hyperlink base</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AppTitle</PropName>
 <PropType>10</PropType>
 <PropValueText>Matt&apos;s Version Control</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AppIcon</PropName>
 <PropType>10</PropType>
 <PropValueText>C:\Documents and Settings\Matt\Desktop\icons\xpsp2res.dll_I0384_0409.ico</PropValueText>
 <PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>StartUpShowDBWindow</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>StartUpShowStatusBar</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AllowFullMenus</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AllowShortcutMenus</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AllowBuiltInToolbars</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AllowToolbarChanges</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
+</__PROPERTIES__>
+<__PROPERTIES__>
 <PropCollection>StartupProperties</PropCollection>
 <PropName>AllowSpecialKeys</PropName>
 <PropType>1</PropType>
 <PropValueBoolean>1</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Status Bar</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Startup Dialog Box</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show New Object Shortcuts</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Hidden Objects</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show System Objects</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>ShowWindowsInTaskbar</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Macro Names Column</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Conditions Column</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Database Explorer Click Behavior</PropName>
-<PropType>2</PropType>
-<PropValueInteger>1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Left Margin</PropName>
-<PropType>8</PropType>
-<PropValueText>2.564cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Right Margin</PropName>
-<PropType>8</PropType>
-<PropValueText>2.554cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Top Margin</PropName>
-<PropType>8</PropType>
-<PropValueText>2.554cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Bottom Margin</PropName>
-<PropType>8</PropType>
-<PropValueText>2.554cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Four-Digit Year Formatting</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Four-Digit Year Formatting All Databases</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Track Name AutoCorrect Info</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Perform Name AutoCorrect</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Log Name AutoCorrect Changes</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Enable MRU File List</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Size of MRU File List</PropName>
-<PropType>2</PropType>
-<PropValueInteger>4</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Provide Feedback with Sound</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Auto Compact</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>New Database Sort Order</PropName>
-<PropType>3</PropType>
-<PropValueBoolean>0</PropValueBoolean>
-<PropValueLong>1033</PropValueLong>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Remove Personal Information</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Database Directory</PropName>
-<PropType>8</PropType>
-<PropValueText>C:\Documents and Settings\Matt\My Documents\</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Find/Replace Behavior</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Confirm Record Changes</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Confirm Document Deletions</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Confirm Action Queries</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Values in Indexed</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Values in Non-Indexed</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Values in Remote</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Values in Snapshot</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Values in Server</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Color</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Background Color</PropName>
-<PropType>2</PropType>
-<PropValueInteger>15</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Gridlines Color</PropName>
-<PropType>2</PropType>
-<PropValueInteger>8</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Gridlines Horizontal</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Gridlines Vertical</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Column Width</PropName>
-<PropType>8</PropType>
-<PropValueText>2.499cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Name</PropName>
-<PropType>8</PropType>
-<PropValueText>Arial</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Weight</PropName>
-<PropType>2</PropType>
-<PropValueInteger>3</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Size</PropName>
-<PropType>3</PropType>
-<PropValueBoolean>0</PropValueBoolean>
-<PropValueLong>10</PropValueLong>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Underline</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Font Italic</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Cell Effect</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Animations</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Smart Tags on Datasheets</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Move After Enter</PropName>
-<PropType>2</PropType>
-<PropValueInteger>1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Behavior Entering Field</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Arrow Key Behavior</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Cursor Stops at First/Last Field</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Ime Autocommit</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Datasheet Ime Control</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Text Field Size</PropName>
-<PropType>2</PropType>
-<PropValueInteger>50</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Number Field Size</PropName>
-<PropType>2</PropType>
-<PropValueInteger>2</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Field Type</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>AutoIndex on Import/Create</PropName>
-<PropType>8</PropType>
-<PropValueText>ID;key;code;num</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Table Names</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Output All Fields</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Enable AutoJoin</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Run Permissions</PropName>
-<PropType>2</PropType>
-<PropValueInteger>1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>ANSI Query Mode</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>ANSI Query Mode Default</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Query Design Font Name</PropName>
-<PropType>8</PropType>
-<PropValueText>Tahoma</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Query Design Font Size</PropName>
-<PropType>3</PropType>
-<PropValueBoolean>0</PropValueBoolean>
-<PropValueLong>8</PropValueLong>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Property Update Options buttons</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Selection Behavior</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Form Template</PropName>
-<PropType>8</PropType>
-<PropValueText>Normal</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Report Template</PropName>
-<PropType>8</PropType>
-<PropValueText>Normal</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Always Use Event Procedures</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Show Smart Tags on Forms</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Themed Form Controls</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Ignore DDE Requests</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Enable DDE Refresh</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default File Format</PropName>
-<PropType>2</PropType>
-<PropValueInteger>9</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Open Mode for Databases</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Command-Line Arguments</PropName>
-<PropType>8</PropType>
-<PropValueText></PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>OLE/DDE Timeout (sec)</PropName>
-<PropType>2</PropType>
-<PropValueInteger>30</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Record Locking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Refresh Interval (sec)</PropName>
-<PropType>2</PropType>
-<PropValueInteger>60</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Number of Update Retries</PropName>
-<PropType>2</PropType>
-<PropValueInteger>2</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>ODBC Refresh Interval (sec)</PropName>
-<PropType>2</PropType>
-<PropValueInteger>1500</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Update Retry Interval (msec)</PropName>
-<PropType>2</PropType>
-<PropValueInteger>250</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Use Row Level Locking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Section Indent</PropName>
-<PropType>8</PropType>
-<PropValueText>0.635cm</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Alternate Row Color</PropName>
-<PropType>8</PropType>
-<PropValueText>whitesmoke</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Caption Section Style</PropName>
-<PropType>8</PropType>
-<PropValueText>BACKGROUND-COLOR: steelblue; COLOR: white; FONT-WEIGHT: bold</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Footer Section Style</PropName>
-<PropType>8</PropType>
-<PropValueText>BORDER-TOP: steelblue 1px solid; FONT-WEIGHT: bold</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Use Default Page Folder</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Page Folder</PropName>
-<PropType>8</PropType>
-<PropValueText></PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Use Default Connection File</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default Connection File</PropName>
-<PropType>8</PropType>
-<PropValueText></PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling dictionary language</PropName>
-<PropType>3</PropType>
-<PropValueBoolean>0</PropValueBoolean>
-<PropValueLong>3081</PropValueLong>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling add words to</PropName>
-<PropType>8</PropType>
-<PropValueText>CUSTOM.DIC</PropValueText>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling suggest from main dictionary only</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling ignore words in UPPERCASE</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling ignore words with number</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling ignore Internet and file addresses</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling use German post-reform rules</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling combine aux verb/adj</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling use auto-change list</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling process compound nouns</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling Hebrew modes</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Spelling Arabic modes</PropName>
-<PropType>2</PropType>
-<PropValueInteger>3</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Default direction</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>General alignment</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Cursor movement</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Use Hijri Calendar</PropName>
-<PropType>2</PropType>
-<PropValueInteger>0</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Enable Error Checking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Error Checking Indicator Color</PropName>
-<PropType>2</PropType>
-<PropValueInteger>2</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Unassociated Label and Control Error Checking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Keyboard Shortcut Errors Error Checking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Invalid Control Properties Error Checking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
-<__PROPERTIES__20100202221100>
-<PropCollection>ApplicationOptions</PropCollection>
-<PropName>Common Report Errors Error Checking</PropName>
-<PropType>2</PropType>
-<PropValueInteger>-1</PropValueInteger>
-<PropValueBoolean>0</PropValueBoolean>
-</__PROPERTIES__20100202221100>
+</__PROPERTIES__>
 </dataroot>
 </root>

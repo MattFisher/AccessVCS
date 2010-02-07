@@ -34,8 +34,9 @@ Const PREFIX_PAGE As String = "Pge_"
 Const PREFIX_QUERY As String = "Qry_"
 Const PREFIX_TABLE As String = "Tbl_"
 
-Public Const TABLE_LIST_TABLENAME As String = "__TABLE_LIST__"
-Public Const TABLE_LIST_FILENAME As String = TABLE_LIST_TABLENAME & ".xml"
+'Public Const TABLE_LIST_TABLENAME As String = "__TABLE_LIST__"
+Public Const TABLE_LIST_TABLENAME As String = "__TABLES__BE"
+Public Const TABLE_LIST_FILENAME As String = "__TABLES__.xml"
 Public Const DEFAULT_EXPORT_LOC As String = _
     "C:\Documents and Settings\Matt\My Documents\Projects\test"
 Public exportLocGbl As String
@@ -64,7 +65,8 @@ Dim TableCount As Integer, queryCount As Integer, formCount As Integer, moduleCo
 Dim macroCount As Integer, reportCount As Integer, pageCount As Integer, classCount As Integer
 Dim processTables As Boolean, processQueries As Boolean, processForms As Boolean, processModules As Boolean
 Dim processMacros As Boolean, processReports As Boolean, processPages As Boolean, processClasses As Boolean
-Dim processProperties As Boolean, processOptions As Boolean
+Dim processProperties As Boolean, processOptions As Boolean, processRelationships As Boolean
+Dim processReferences As Boolean
 
 Private Sub ExportForm(formName As String)
 Set app = Access.Application
@@ -119,28 +121,30 @@ app.DoCmd.TransferText TransferType:=acExportDelim, _
 End Sub
 
 Private Sub ExportSpecialTable(tableNameStr As String, exportLoc As String)
-' Copy special table (TABLE_LIST_TABLENAME or PROPERTY_LIST_TABLENAME) from codeDB to currentDB
-Dim GUTableNameStr As String
-GUTableNameStr = tableNameStr & Format(Now(), "yyyyMMddhhmmss")
+' Copy special table
+' (TABLE_LIST_TABLENAME, PROPERTY_LIST_TABLENAME, REFERENCES_TABLENAME or RELATIONS_TABLENAME)
+' from codeDB to currentDB, then save it as an XML file and delete the table again.
+Dim localTableNameStr As String
+localTableNameStr = Left(tableNameStr, Len(tableNameStr) - 2)
 DoCmd.TransferDatabase acImport, "Microsoft Access", _
-    CodeDb.Name, acTable, tableNameStr, GUTableNameStr, False
+    CodeDb.Name, acTable, tableNameStr, localTableNameStr, False
 ' Export the table to an XML File
 app.ExportXML objectType:=acExportTable, _
-              DataSource:=GUTableNameStr, _
-              DataTarget:=exportLoc & tableNameStr & ".xml", _
+              DataSource:=localTableNameStr, _
+              DataTarget:=exportLoc & localTableNameStr & ".xml", _
               OtherFlags:=acEmbedSchema
 ' Delete the table again
 Dim attemptCount As Integer
 On Error Resume Next
-DoCmd.DeleteObject acTable, GUTableNameStr
-While TableExistsInDbGFn(GUTableNameStr)
+DoCmd.DeleteObject acTable, localTableNameStr
+While TableExistsInDbGFn(localTableNameStr)
     attemptCount = attemptCount + 1
     If (attemptCount >= 100) Then
-        MsgBox "Can't deleted the table " & GUTableNameStr & ", and I've tried 100 times!"
+        MsgBox "Can't deleted the table " & localTableNameStr & ", and I've tried 100 times!"
         Exit Sub
     End If
     Sleep (100)
-    DoCmd.DeleteObject acTable, GUTableNameStr
+    DoCmd.DeleteObject acTable, localTableNameStr
 Wend
 End Sub
 
@@ -157,7 +161,7 @@ Debug.Print TABLE_LIST_TABLENAME
 ExportSpecialTable TABLE_LIST_TABLENAME, exportLoc
 
 Dim TableList As DAO.Recordset
-Set TableList = CurrentDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenSnapshot)
+Set TableList = CodeDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, dbOpenSnapshot)
     If Not TableList.EOF Then
         TableList.MoveFirst
         While Not TableList.EOF
@@ -308,135 +312,6 @@ ErrProc:
 MsgBox Err
 End Function
 
-Public Sub Test_createStubDatabase()
-createStubDatabase CurrentDb, GetFSO.GetParentFolderName(CurrentDb.Name) & "\" & GetFSO.GetBaseName(CurrentDb.Name) & "\"
-End Sub
-
-Private Sub createStubDatabase(wholeDB As DAO.Database, stubDBPath As String, Optional overWrite As Boolean = True)
-' This will most likely only work with .mdbs anyway
-On Error GoTo ErrProc
-
-Dim stubDBFilename As String
-Dim stubTempDBFilename As String
-Dim stubDBPathAndFilename As String
-Dim stubTempDBPathAndFilename As String
-
-Dim acc As Access.Application
-Dim i As Integer
-Dim strName As String
-
-stubDBFilename = GetFSO.GetBaseName(wholeDB.Name) & "_stub." & GetFSO.GetExtensionName(wholeDB.Name)
-stubDBPathAndFilename = stubDBPath & "\" & stubDBFilename
-stubTempDBFilename = GetFSO.GetBaseName(wholeDB.Name) & "_stubTemp." & GetFSO.GetExtensionName(wholeDB.Name)
-stubTempDBPathAndFilename = stubDBPath & "\" & stubTempDBFilename
-
-If FileExistsGFn(stubTempDBPathAndFilename) Then
-    If overWrite Then
-        Kill (stubTempDBPathAndFilename)
-    Else
-    'Do nothing - messagebox maybe
-        Exit Sub
-    End If
-End If
-GetFSO.CopyFile wholeDB.Name, stubTempDBPathAndFilename
-
-'Now remove all database objects from the stub.
-
-Set acc = New Access.Application
-acc.OpenCurrentDatabase stubTempDBPathAndFilename
- 
-Debug.Print "Deleting Forms"
-For i = acc.CurrentProject.AllForms.Count - 1 To 0 Step -1
-    strName = acc.CurrentProject.AllForms(i).Name
-    Debug.Print strName
-    acc.DoCmd.DeleteObject acForm, strName
-Next i
- 
-Debug.Print "Deleting Reports"
-For i = acc.CurrentProject.AllReports.Count - 1 To 0 Step -1
-    strName = acc.CurrentProject.AllReports(i).Name
-    Debug.Print strName
-    acc.DoCmd.DeleteObject acReport, strName
-Next i
- 
-Debug.Print "Deleting Modules"
-For i = acc.CurrentProject.AllModules.Count - 1 To 0 Step -1
-    strName = acc.CurrentProject.AllModules(i).Name
-    Debug.Print strName
-    acc.DoCmd.DeleteObject acModule, strName
-Next i
-
-Debug.Print "Deleting Macros"
-For i = acc.CurrentProject.AllMacros.Count - 1 To 0 Step -1
-    strName = acc.CurrentProject.AllMacros(i).Name
-    Debug.Print strName
-    acc.DoCmd.DeleteObject acMacro, strName
-Next i
-
-Debug.Print "Deleting Queries"
-For i = acc.CurrentData.AllQueries.Count - 1 To 0 Step -1
-    strName = acc.CurrentData.AllQueries(i).Name
-    Debug.Print strName
-    acc.DoCmd.DeleteObject acQuery, strName
-Next i
-
-Debug.Print "Deleting Tables"
-For i = acc.CurrentData.AllTables.Count - 1 To 0 Step -1
-    strName = acc.CurrentData.AllTables(i).Name
-    Debug.Print strName
-    If Left(strName, 4) <> "MSys" Then
-        acc.DoCmd.DeleteObject acTable, strName
-    End If
-Next i
-
-acc.CloseCurrentDatabase
-
-If FileExistsGFn(stubDBPathAndFilename) Then
-    Kill (stubDBPathAndFilename)
-End If
-If (acc.CompactRepair(stubTempDBPathAndFilename, stubDBPathAndFilename)) Then
-    GetFSO.DeleteFile stubTempDBPathAndFilename
-End If
-acc.Quit
-
-Exit Sub
-ErrProc:
-DispErrMsgGSb Error$, "create a stub database"
-
-''for each tabledef
-'Dim objectType
-'Dim objectTypes As New Collection
-'objectTypes.Add "Forms"
-''objectTypes.Add "Classes"
-'objectTypes.Add "Reports"
-'objectTypes.Add "Scripts"
-'objectTypes.Add "Modules"
-'objectTypes.Add "Tables"
-'
-'Dim c As Container
-'Dim d As Document
-'
-'For Each objectType In objectTypes
-'    Debug.Print objectType
-'    Set c = stubDB.Containers(objectType)
-'    For Each d In c.Documents
-'        If (Left(d.Name, 1) <> "~") And (Left(d.Name, 4) <> "MSys") Then
-'            Debug.Print "Deleting: " & d.Name
-'            ' , d.Name
-'        End If
-'    Next d
-'Next objectType
-'
-'Dim i As Integer
-'For i = 0 To stubDB.QueryDefs.Count - 1
-'    'Skip the embedded queries
-'    If Left(stubDB.QueryDefs(i).Name, 1) <> "~" Then
-'        Debug.Print "Exporting Query: " & stubDB.QueryDefs(i).Name
-'    End If
-'Next i
-        
-End Sub
-
 Public Sub test_project()
 Dim db As Database
 Dim myForm As AccessObject
@@ -495,8 +370,11 @@ processMacros = True
 processReports = True
 processPages = True
 processProperties = True
-processOptions = True
+processOptions = False
+processRelationships = True
+processReferences = True
 
+Set app = Access.Application
 Set db = app.CurrentDb
 
 StartTimer
@@ -506,6 +384,16 @@ If Not (db Is Nothing) Then
         ListAllProperties
         If processOptions Then ListAllOptions
         ExportSpecialTable PROPERTY_LIST_TABLENAME, exportLoc
+    End If
+    
+    If processRelationships Then
+        ListRelationships
+        ExportSpecialTable RELATIONS_TABLENAME, exportLoc
+    End If
+    
+    If processReferences Then
+        ListReferences
+        ExportSpecialTable REFERENCES_TABLENAME, exportLoc
     End If
     
     If processTables Then
@@ -619,8 +507,8 @@ Dim tempFile As File, oldFile As File
 Dim resultStr As String
 Dim TempFolder As String
 TempFolder = "__TEMP__"
-Dim fso As Object
-Set fso = GetFSO
+Dim FSO As Object
+Set FSO = GetFSO
 tempPath = srcFolder & TempFolder
 If Not CheckAndBuildFolderGFn(tempPath) Then
     'Error - couldn't create a temp directory!
@@ -637,10 +525,10 @@ CreateFileList srcFolder, oldFileList
 For Each oldFilename In oldFileList
     If oldFilename <> "" Then
         If (Dir(tempPath & "\" & oldFilename) = "") Then
-            Set oldFile = fso.GetFile(srcFolder & "\" & oldFilename)
+            Set oldFile = FSO.GetFile(srcFolder & "\" & oldFilename)
             'If the 'new' file doesn't exist, the old one should be deleted.
             Debug.Print " Removed!: [" & oldFilename & "]"
-            Kill oldFile.path
+            Kill oldFile.Path
         End If
     End If
 Next oldFilename
@@ -649,21 +537,21 @@ Next oldFilename
 'Copy changed files to srcFolder, overwriting old versions.
 For Each tempFilename In newFileList
     If tempFilename <> "" Then
-        Set tempFile = fso.GetFile(tempPath & "\" & tempFilename)
+        Set tempFile = FSO.GetFile(tempPath & "\" & tempFilename)
         If (Dir(srcFolder & "\" & tempFilename) <> "") Then
-            Set oldFile = fso.GetFile(srcFolder & "\" & tempFilename)
+            Set oldFile = FSO.GetFile(srcFolder & "\" & tempFilename)
             If FileIsChangedAndNewerGFn(tempFile, oldFile) Then
                 'Overwrite old with new
                 'Kill oldFile.Path
                 Debug.Print " Changed!: [" & tempFilename & "]"
-                fso.CopyFile tempFile.path, oldFile.path, True
+                FSO.CopyFile tempFile.Path, oldFile.Path, True
             Else
                 Debug.Print "Unchanged: [" & tempFilename & "]"
             End If
         Else
             'If the 'old' file doesn't exist, the new one should be added.
             Debug.Print "     New!: [" & tempFilename & "]"
-            fso.CopyFile tempFile.path, srcFolder & "\" & tempFile.Name, True
+            FSO.CopyFile tempFile.Path, srcFolder & "\" & tempFile.Name, True
         End If
     End If
 
@@ -709,7 +597,10 @@ Do While currentFile <> ""
        filePrefix = PREFIX_PAGE Or _
        filePrefix = PREFIX_QUERY Or _
        filePrefix = PREFIX_TABLE Or _
-       currentFile = TABLE_LIST_FILENAME Then
+       currentFile = TABLE_LIST_FILENAME Or _
+       currentFile = PROPERTY_LIST_FILENAME Or _
+       currentFile = RELATIONS_FILENAME Or _
+       currentFile = REFERENCES_FILENAME Then
         If filePrefix = PREFIX_MODULE Then Count_Mod = Count_Mod + 1
         If filePrefix = PREFIX_FORM Then Count_Frm = Count_Frm + 1
         If filePrefix = PREFIX_REPORT Then Count_Rpt = Count_Rpt + 1
@@ -942,8 +833,8 @@ CheckAndBuildFolderGFn (exportLocGbl)
 
 ExportThisDataBase = False
 
-Set app = Application
-createStubDatabase CurrentDb, GetFSO.GetParentFolderName(exportLocGbl), False
+'Set app = Application
+'createStubDatabase CurrentDb, GetFSO.GetParentFolderName(exportLocGbl), False
 
 MsgBox "EXPORTED:" & vbCrLf & ExportChangedItems(exportLocGbl)
 CreateShortcut CreateBuildScript(GetFSO.GetParentFolderName(exportLocGbl)), _
@@ -983,11 +874,11 @@ Debug.Print "dbAttachedODBC: "
 printHexTest dbAttachedODBC
 End Function
 
-Public Function Test_OpenForm()
+Public Function OpenMattsVCSForm()
 DoCmd.OpenForm "MattsVCSFrm"
-MsgBox "Code Project Name: " & Application.CodeProject.Name & vbCrLf & _
-       "Code Project FullName: " & Application.CodeProject.FullName & vbCrLf & _
-       "Count of Modules: " & Application.CodeProject.AllModules.Count
+'MsgBox "Code Project Name: " & Application.CodeProject.Name & vbCrLf &
+'       "Code Project FullName: " & Application.CodeProject.FullName & vbCrLf & _
+'       "Count of Modules: " & Application.CodeProject.AllModules.Count
 
 End Function
 

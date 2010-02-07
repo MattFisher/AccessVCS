@@ -2,7 +2,6 @@ Option Compare Database
 Option Explicit
 
 Public Function ListTables() As Integer
-'Currently (sometimes) takes 54 seconds! WHY?
 
 'Tbl_ID, Tbl_Connect, Tbl_SourceTableName, Tbl_Selected, Tbl_FELinkTblName,
 'Tbl_Attributes, Tbl_System, Tbl_Hidden, Tbl_AttachedTable, Tbl_AttachedODBC,
@@ -40,7 +39,7 @@ Set db = Access.CurrentDb
 
 If resetTableList Then CodeDb.Execute "DELETE * FROM " & TABLE_LIST_TABLENAME
 
-Set TableList = CodeDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenTable)
+Set TableList = CodeDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenDynaset)
     If Not TableList.EOF Then
         TableList.MoveFirst
     End If
@@ -58,8 +57,7 @@ Set TableList = CodeDb.OpenRecordset(TABLE_LIST_TABLENAME, dbOpenTable)
         If (td.Attributes And dbAttachedTable) Then Debug.Print "dbAttachedTable"
         If (td.Attributes And dbAttachedODBC) Then Debug.Print "dbAttachedODBC"
     
-        If (td.Name <> TABLE_LIST_TABLENAME) And _
-           ((td.Attributes And dbSystemObject) = 0) And _
+        If ((td.Attributes And dbSystemObject) = 0) And _
            ((td.Attributes And dbHiddenObject) = 0) And _
            (Left(td.Name, 4) <> "MSys") Then
             TableList.AddNew

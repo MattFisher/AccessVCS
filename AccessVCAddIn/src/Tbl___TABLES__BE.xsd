@@ -3,12 +3,12 @@
 <xsd:element name="dataroot">
 <xsd:complexType>
 <xsd:sequence>
-<xsd:element ref="__TABLE_LIST_TEMPLATE__" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element ref="__TABLES__BE" minOccurs="0" maxOccurs="unbounded"/>
 </xsd:sequence>
 <xsd:attribute name="generated" type="xsd:dateTime"/>
 </xsd:complexType>
 </xsd:element>
-<xsd:element name="__TABLE_LIST_TEMPLATE__">
+<xsd:element name="__TABLES__BE">
 <xsd:annotation>
 <xsd:appinfo>
 <od:index index-name="TableID" index-key="Tbl_ID " primary="no" unique="no" clustered="no"/>

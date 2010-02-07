@@ -296,3 +296,42 @@ Exit Function
 ErrProc:
     DispErrMsgGSb Error$, "Count the " & objectType & " in " & db.Name
 End Function
+
+Function reallyDeleteFolderIfThere(FolderPathStr As String) As Boolean
+
+    Dim prpNew As Property
+    Dim errLoop As Error
+    Dim FSO As Object
+    Set FSO = GetFSO
+    
+    ' Attempt to set the specified property.
+    On Error GoTo Err_Delete
+        While FSO.FolderExists(FolderPathStr)
+            FSO.DeleteFolder FolderPathStr & "\"
+        Wend
+        reallyDeleteFolderIfThere = True
+    On Error GoTo 0
+    
+    Exit Function
+
+Err_Delete:
+    'Error 3001 : Invalid argument
+    If DBEngine.Errors(0).number = 3001 Then
+        Resume Next
+    ' Error 3265 means that the item was not found in the collection (?)
+    ElseIf DBEngine.Errors(0).number = 3265 Then
+        Resume Next
+    Else
+    ' If different error has occurred, display message.
+        For Each errLoop In DBEngine.Errors
+            MsgBox "Error number: " & errLoop.number & vbCr & _
+                errLoop.Description
+        Next errLoop
+        Resume Next
+    End If
+
+End Function
+
+Public Sub test_reallyDeleteFolderIfThere()
+reallyDeleteFolderIfThere "C:\Documents and Settings\Matt\My Documents\Projects\MattsVCS-Access\MattsVCS-Access-Addin\AccessVCAddIn\src\__TEMP__"
+End Sub

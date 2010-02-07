@@ -49,3 +49,5 @@
 '   DONE    Add "Build new Database" button
 '   DONE    Delete __TABLE_LIST__ on completion of build? Or leave TABLE_LIST in addin DB permanently?
 'Saving relationships, options and startup properties may allow us to eliminate the stub database entirely
+'Import properties on MAKE - do it FIRST so you can delete the table afterwards.
+'Reconsider placement of __TABLE_LIST__ again! (It's needed for re-linking tables)
