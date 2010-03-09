@@ -17,6 +17,7 @@ Dim relCount As Integer
 Dim db As DAO.Database
 Dim Rels As DAO.Recordset
 
+Log "Taking stock of database relationships"
 Set db = Access.CurrentDb
 
 CodeDb.Execute "DELETE * FROM " & RELATIONS_TABLENAME

@@ -99,6 +99,7 @@ Dim propertyCollection As Collection
 Set propertyCollection = getSummaryPropertyCollection()
 
 Set db = Access.CurrentDb
+Log "Taking stock of datatabase properties"
 
 CodeDb.Execute "DELETE * FROM " & PROPERTY_LIST_TABLENAME
 
@@ -247,6 +248,7 @@ Dim optionCollection As Collection
 Set optionCollection = getOptionCollection()
 
 'Set db = Access.CurrentDb
+Log "Taking stock of datatabase options"
 
 Set OptionList = CodeDb.OpenRecordset(PROPERTY_LIST_TABLENAME, dbOpenDynaset)
     If Not OptionList.EOF Then

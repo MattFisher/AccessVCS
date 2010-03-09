@@ -1,6 +1,6 @@
 Version =19
 VersionRequired =19
-Checksum =233073993
+Checksum =-1912835941
 Begin Form
     AllowFilters = NotDefault
     RecordSelectors = NotDefault
@@ -20,13 +20,13 @@ Begin Form
     PictureAlignment =2
     DatasheetGridlinesBehavior =3
     GridY =10
-    Width =13209
+    Width =15987
     DatasheetFontHeight =10
-    ItemSuffix =39
-    Left =780
-    Top =825
-    Right =13995
-    Bottom =9735
+    ItemSuffix =44
+    Left =945
+    Top =885
+    Right =16965
+    Bottom =9810
     DatasheetGridlinesColor =12632256
     RecSrcDt = Begin
         0xa87e69fa7798e340
@@ -35,10 +35,18 @@ Begin Form
         0x64ec83390813ae44885105a11c919502
     End
     NameMap = Begin
-        0x0acc0e55000000002711de0961332741b3b860df5449c8f601000000cc51f772 ,
-        0x17a3e340000000001cb313005400610062006c00650053007500620046007200 ,
-        0x6d00000000000000000000000000000000000000000000000c00000003000000 ,
-        0x0000000000000000000000000000
+        0x0acc0e55000000002711de0961332741b3b860df5449c8f6010000009c128655 ,
+        0x97a4e340150000009c2073025400610062006c00650053007500620046007200 ,
+        0x6d000000000000004e2a496262a21142959719f09284dcff0000000067b5ac43 ,
+        0x97a4e340e0b53002000000005f005f004c006f006700540062006c005f005f00 ,
+        0x0000000000009b4b3d49bfc1874f8bcd9f90c0d043b0070000004e2a496262a2 ,
+        0x1142959719f09284dcff4c006f0067005f004900440000000000000058388eae ,
+        0x728b2c43ba3a221d1828054a070000004e2a496262a21142959719f09284dcff ,
+        0x4c006f0067005f00540069006d0065007300740061006d007000000000000000 ,
+        0x13626aa10f4be7439bb6836e5ad0baae070000004e2a496262a21142959719f0 ,
+        0x9284dcff4c006f0067005f004d00650073007300610067006500000000000000 ,
+        0x000000000000000000000000000000000c000000030000000000000000000000 ,
+        0x000000000000
     End
     DatasheetFontName ="Arial"
     PrtMip = Begin
@@ -199,14 +207,30 @@ Begin Form
             LabelX =-1701
             FontName ="Tahoma"
         End
+        Begin ListBox
+            SpecialEffect =2
+            Width =1701
+            Height =1417
+            LabelX =-1701
+            FontName ="Tahoma"
+        End
         Begin Subform
             SpecialEffect =2
             Width =1701
             Height =1701
         End
+        Begin Tab
+            Width =5103
+            Height =3402
+            FontName ="Tahoma"
+        End
+        Begin Page
+            Width =1701
+            Height =1701
+        End
         Begin Section
             CanGrow = NotDefault
-            Height =9435
+            Height =8957
             BackColor =-2147483633
             Name ="Detail"
             GUID = Begin
@@ -275,7 +299,7 @@ Begin Form
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =85
+                            OverlapFlags =93
                             Left =170
                             Top =1644
                             Width =1560
@@ -323,12 +347,12 @@ Begin Form
                     End
                 End
                 Begin TextBox
-                    OverlapFlags =85
+                    OverlapFlags =215
                     IMESentenceMode =3
-                    Left =1813
-                    Top =2154
-                    Width =4165
-                    Height =1060
+                    Left =13096
+                    Top =4535
+                    Width =2650
+                    Height =2395
                     TabIndex =4
                     Name ="C_EmbeddedPicsNxt"
                     GUID = Begin
@@ -336,9 +360,9 @@ Begin Form
                     End
                     Begin
                         Begin Label
-                            OverlapFlags =85
-                            Left =453
-                            Top =2154
+                            OverlapFlags =93
+                            Left =13097
+                            Top =4308
                             Width =1335
                             Height =240
                             Name ="Label11"
@@ -407,8 +431,8 @@ Begin Form
                 Begin OptionGroup
                     Visible = NotDefault
                     OverlapFlags =85
-                    Left =6406
-                    Top =2274
+                    Left =13266
+                    Top =290
                     Width =2301
                     Height =1349
                     TabIndex =7
@@ -422,8 +446,8 @@ Begin Form
                             Visible = NotDefault
                             BackStyle =1
                             OverlapFlags =215
-                            Left =6526
-                            Top =2154
+                            Left =13386
+                            Top =170
                             Width =1995
                             Height =240
                             BackColor =-2147483633
@@ -435,8 +459,8 @@ Begin Form
                         End
                         Begin OptionButton
                             OverlapFlags =87
-                            Left =6576
-                            Top =2579
+                            Left =13436
+                            Top =595
                             OptionValue =2
                             Name ="Option23"
                             GUID = Begin
@@ -445,8 +469,8 @@ Begin Form
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =6807
-                                    Top =2551
+                                    Left =13667
+                                    Top =567
                                     Width =945
                                     Height =240
                                     Name ="Label24"
@@ -459,8 +483,8 @@ Begin Form
                         End
                         Begin OptionButton
                             OverlapFlags =87
-                            Left =6576
-                            Top =2877
+                            Left =13436
+                            Top =893
                             OptionValue =1
                             Name ="Option21"
                             GUID = Begin
@@ -469,8 +493,8 @@ Begin Form
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =6807
-                                    Top =2849
+                                    Left =13667
+                                    Top =865
                                     Width =855
                                     Height =240
                                     Name ="Label22"
@@ -483,8 +507,8 @@ Begin Form
                         End
                         Begin OptionButton
                             OverlapFlags =87
-                            Left =6576
-                            Top =3175
+                            Left =13436
+                            Top =1191
                             OptionValue =3
                             Name ="Option31"
                             GUID = Begin
@@ -493,8 +517,8 @@ Begin Form
                             Begin
                                 Begin Label
                                     OverlapFlags =247
-                                    Left =6807
-                                    Top =3175
+                                    Left =13667
+                                    Top =1191
                                     Width =1095
                                     Height =240
                                     Name ="Label32"
@@ -509,7 +533,7 @@ Begin Form
                 End
                 Begin CommandButton
                     Visible = NotDefault
-                    OverlapFlags =85
+                    OverlapFlags =93
                     PictureType =1
                     Left =12465
                     Top =1590
@@ -525,47 +549,18 @@ Begin Form
                         0xd7f5de94d066854fbd05d925a143c42f
                     End
                 End
-                Begin Subform
-                    OverlapFlags =87
-                    Left =287
-                    Top =3900
-                    Width =12795
-                    Height =4080
-                    TabIndex =9
-                    Name ="TableSubFrmCtl"
-                    SourceObject ="Form.TableSubFrm"
-                    GUID = Begin
-                        0x4d4ca1899be1e541b9210a230df9ca51
-                    End
-                    Begin
-                        Begin Label
-                            OverlapFlags =93
-                            Left =285
-                            Top =3570
-                            Width =1005
-                            Height =330
-                            FontSize =11
-                            FontWeight =700
-                            Name ="TableSubFrm Label"
-                            Caption ="Tables"
-                            EventProcPrefix ="TableSubFrm_Label"
-                            GUID = Begin
-                                0x04925e40b42b9545b30b573566a0ccd0
-                            End
-                        End
-                    End
-                End
                 Begin Label
-                    OverlapFlags =247
+                    OverlapFlags =85
                     TextFontFamily =49
-                    Left =9354
-                    Top =1587
+                    Left =13096
+                    Top =1814
                     Width =2610
                     Height =2235
                     FontSize =9
                     Name ="C_ObjectListLbl"
-                    Caption ="v Tables\015\012x Forms\015\012y Queries\015\012z Modules\015\012a Classes\015\012"
-                        "b Macros\015\012c Data Access Pages"
+                    Caption ="  0 DataAccessPages\015\012  4 Databases\015\012  2 Forms\015\012 21 Modules\015"
+                        "\012  0 Relationships\015\012  0 Reports\015\012  0 Scripts\015\012  0 SysRel\015"
+                        "\012 14 Tables"
                     FontName ="Lucida Console"
                     GUID = Begin
                         0x1efcf21a2e08e5428650d5375b192759
@@ -577,7 +572,7 @@ Begin Form
                     Top =8163
                     Width =1941
                     Height =576
-                    TabIndex =10
+                    TabIndex =9
                     Name ="C_CommitBtn"
                     Caption ="Commit to Git"
                     OnClick ="[Event Procedure]"
@@ -591,7 +586,7 @@ Begin Form
                     Top =8163
                     Width =1821
                     Height =576
-                    TabIndex =11
+                    TabIndex =10
                     Name ="C_BuildBtn"
                     Caption ="Build New Copy\015\012of Database"
                     OnClick ="[Event Procedure]"
@@ -605,7 +600,7 @@ Begin Form
                     Top =8163
                     Width =2091
                     Height =576
-                    TabIndex =12
+                    TabIndex =11
                     Name ="C_PushChangesBtn"
                     Caption ="Push changes to remote repository"
                     OnClick ="[Event Procedure]"
@@ -619,12 +614,82 @@ Begin Form
                     Top =8163
                     Width =1035
                     Height =570
-                    TabIndex =13
+                    TabIndex =12
                     Name ="C_CloseBtn"
                     Caption ="Close Form"
                     OnClick ="[Event Procedure]"
                     GUID = Begin
                         0x839497d066c4e046ad263c9171ff6e21
+                    End
+                End
+                Begin Tab
+                    OverlapFlags =247
+                    Left =165
+                    Top =1587
+                    Width =12815
+                    Height =6453
+                    TabIndex =13
+                    Name ="C_DetailTabCtl"
+                    GUID = Begin
+                        0x7a4dcc7087d01a4f96d2fd5c8c79f679
+                    End
+                    Begin
+                        Begin Page
+                            OverlapFlags =247
+                            Left =300
+                            Top =1995
+                            Width =12540
+                            Height =5910
+                            Name ="Tables"
+                            GUID = Begin
+                                0x48e6e772debc5b4fa0bb77f198d41443
+                            End
+                            Begin
+                                Begin Subform
+                                    OverlapFlags =247
+                                    Left =361
+                                    Top =2000
+                                    Width =12420
+                                    Height =5835
+                                    Name ="TableSubFrmCtl"
+                                    SourceObject ="Form.TableSubFrm"
+                                    GUID = Begin
+                                        0x1e447a38dc075a40bf55e91aac750b99
+                                    End
+                                End
+                            End
+                        End
+                        Begin Page
+                            OverlapFlags =247
+                            Left =300
+                            Top =1995
+                            Width =12540
+                            Height =5910
+                            Name ="Export Log"
+                            EventProcPrefix ="Export_Log"
+                            GUID = Begin
+                                0xd88069f1625b6d478c0f115ef63dfce9
+                            End
+                            Begin
+                                Begin ListBox
+                                    OverlapFlags =247
+                                    IMESentenceMode =3
+                                    ColumnCount =3
+                                    Left =309
+                                    Top =2003
+                                    Width =12480
+                                    Height =5842
+                                    Name ="C_LogListBox"
+                                    RowSourceType ="Table/Query"
+                                    RowSource ="SELECT [__LogTbl__].Log_ID, [__LogTbl__].Log_Timestamp, [__LogTbl__].Log_Message"
+                                        " FROM __LogTbl__ ORDER BY [__LogTbl__].Log_ID; "
+                                    ColumnWidths ="0;1989"
+                                    GUID = Begin
+                                        0x4abef7cf816b234fb29668972cc355ff
+                                    End
+                                End
+                            End
+                        End
                     End
                 End
             End
@@ -662,6 +727,7 @@ End Sub
 Private Sub C_CloseBtn_Click()
 On Error GoTo Err_C_CloseBtn_Click
 
+    SetLogWatchingListBox Nothing
     DoCmd.Close
 
 Exit_C_CloseBtn_Click:
@@ -676,6 +742,8 @@ End Sub
 Private Sub C_ExportBtn_Click()
 On Error GoTo ErrProc
 
+Me.C_DetailTabCtl.Value = 1
+Log "Starting export of " & CurrentDb.Name
 ExportThisDataBase
 
 ExitProc:
@@ -787,6 +855,9 @@ End Sub
 
 Private Sub Form_Load()
 Dim sourceFolderStr As String
+
+SetLogWatchingListBox Me.C_LogListBox
+ClearLog
 
 'MsgBox "Listing Tables, CurrentDB: " & Application.CurrentDb.Name
 Set Forms("MattsVCSFrm").TableSubFrmCtl.Form.Recordset = Nothing

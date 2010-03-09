@@ -152,11 +152,12 @@ Private Function ExportListedTables(exportLoc As String) As Integer
 Dim TableCount As Integer
 TableCount = 0
 Set app = Access.Application
-Debug.Print "***** Tables *****"
 'exportLoc = "G:\repos\MattsVCS\MattsVCS-Access\MattsVCS-Access-Addin\test\src\"
 'exportLoc = GetDBFolderNameGFn(CurrentDb) & "\" & GetFSO.GetBaseName(CurrentDb.Name) & "\src\"
 If (Right(exportLoc, 1) <> "\") Then exportLoc = exportLoc & "\"
 CheckAndBuildFolderGFn (exportLoc)
+
+Log "***** Tables *****"
 Debug.Print TABLE_LIST_TABLENAME
 ExportSpecialTable TABLE_LIST_TABLENAME, exportLoc
 
@@ -168,33 +169,33 @@ Set TableList = CodeDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, db
             If TableList("Tbl_ContainsBinary") Then
                 If TableList("Tbl_ExportSchema") Then
                     If TableList("Tbl_ExportData") Then
-                        Debug.Print TableList("Tbl_Name") & " (Combined XML)"
+                        Log "Exporting " & TableList("Tbl_Name") & " (Combined XML)"
                         ExportTableSchemaAndDataAsXml TableList("Tbl_Name"), exportLoc
                         TableCount = TableCount + 1
                     Else
-                        Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
+                        Log "Exporting " & TableList("Tbl_Name") & " (XSD Schema)"
                         ExportTableSchemaAsXsd TableList("Tbl_Name"), exportLoc
                         TableCount = TableCount + 1
                     End If
                 Else
                     If TableList("Tbl_ExportData") Then
-                        Debug.Print TableList("Tbl_Name") & " (XML Data Only)"
+                        Log "Exporting " & TableList("Tbl_Name") & " (XML Data Only)"
                         ExportTableDataOnlyAsXml TableList("Tbl_Name"), exportLoc
                         TableCount = TableCount + 1
                     End If
                 End If
             Else
                 If TableList("Tbl_ExportSchema") Then
-                    Debug.Print TableList("Tbl_Name") & " (XSD Schema)"
+                    Log "Exporting " & TableList("Tbl_Name") & " (XSD Schema)"
                     ExportTableSchemaAsXsd TableList("Tbl_Name"), exportLoc
                     TableCount = TableCount + 1
                     If TableList("Tbl_ExportData") Then
-                        Debug.Print TableList("Tbl_Name") & " (TXT Data)"
+                        Log "Exporting " & TableList("Tbl_Name") & " (TXT Data)"
                         ExportTableDataAsTxt TableList("Tbl_Name"), exportLoc
                     End If
                 Else
                     If TableList("Tbl_ExportData") Then
-                        Debug.Print TableList("Tbl_Name") & " (TXT Data)"
+                        Log "Exporting " & TableList("Tbl_Name") & " (TXT Data)"
                         ExportTableDataAsTxt TableList("Tbl_Name"), exportLoc
                         TableCount = TableCount + 1
                     End If
@@ -204,6 +205,8 @@ Set TableList = CodeDb.OpenRecordset("SELECT * FROM " & TABLE_LIST_TABLENAME, db
         Wend
     End If
 TableList.Close
+
+Log TableCount & " Tables Exported"
 
 Dim exportIniFile As String
 exportIniFile = Dir(exportLoc & "export.ini")
@@ -403,42 +406,44 @@ If Not (db Is Nothing) Then
     ExportDatabaseObjects = TableCount & " tables" & vbCrLf
 
     If processForms Then
-        Debug.Print "***** Forms *****"
+        Log "***** Forms *****"
         Set c = db.Containers("Forms")
         For Each d In c.Documents
             If performExport Then
-                Debug.Print "Exporting Form: " & d.Name
+                Log "Exporting Form: " & d.Name
                 app.SaveAsText acForm, d.Name, exportLoc & PREFIX_FORM & d.Name & FILE_EXT_FORM
             End If
             formCount = formCount + 1
             CheckTimer
         Next d
     End If
+    Log formCount & " Forms Exported"
     ExportDatabaseObjects = ExportDatabaseObjects & formCount & " forms" & vbCrLf
     
     'If processPages ...
     'pageCount & " data access pages"
     
     If processReports Then
-        Debug.Print "***** Reports *****"
+        Log "***** Reports *****"
         Set c = db.Containers("Reports")
         For Each d In c.Documents
             If performExport Then
-                Debug.Print "Exporting Report: " & d.Name
+                Log "Exporting Report: " & d.Name
                 app.SaveAsText acReport, d.Name, exportLoc & PREFIX_REPORT & d.Name & FILE_EXT_REPORT
             End If
             reportCount = reportCount + 1
             CheckTimer
         Next d
     End If
+    Log reportCount & " Reports Exported"
     ExportDatabaseObjects = ExportDatabaseObjects & reportCount & " reports" & vbCrLf
     
     If processMacros Then
-        Debug.Print "***** Macros *****"
+        Log "***** Macros *****"
         Set c = db.Containers("Scripts")
         For Each d In c.Documents
             If performExport Then
-                Debug.Print "Exporting Macro: " & d.Name
+                Log "Exporting Macro: " & d.Name
                 app.SaveAsText acMacro, d.Name, _
                                      exportLoc & PREFIX_MACRO & d.Name & FILE_EXT_MACRO
             End If
@@ -446,14 +451,15 @@ If Not (db Is Nothing) Then
             CheckTimer
         Next d
     End If
+    Log macroCount & " Macros Exported"
     ExportDatabaseObjects = ExportDatabaseObjects & macroCount & " macros" & vbCrLf
     
     If processModules Then
-        Debug.Print "***** Modules *****"
+        Log "***** Modules *****"
         Set c = db.Containers("Modules")
         For Each d In c.Documents
             If performExport Then
-                Debug.Print "Exporting Module: " & d.Name
+                Log "Exporting Module: " & d.Name
                 app.SaveAsText acModule, d.Name, _
                                      exportLoc & PREFIX_MODULE & d.Name & FILE_EXT_MODULE
             End If
@@ -461,15 +467,16 @@ If Not (db Is Nothing) Then
             CheckTimer
         Next d
     End If
+    Log moduleCount & " Modules Exported"
     ExportDatabaseObjects = ExportDatabaseObjects & moduleCount & " modules" & vbCrLf
     
     If processQueries Then
-        Debug.Print "***** Queries *****"
+        Log "***** Queries *****"
         For i = 0 To db.QueryDefs.Count - 1
             'Skip the embedded queries
             If Left(db.QueryDefs(i).Name, 1) <> "~" Then
                 If performExport Then
-                    Debug.Print "Exporting Query: " & db.QueryDefs(i).Name
+                    Log "Exporting Query: " & db.QueryDefs(i).Name
                     app.SaveAsText acQuery, db.QueryDefs(i).Name, _
                                          exportLoc & PREFIX_QUERY & db.QueryDefs(i).Name & FILE_EXT_QUERY
                 End If
@@ -478,6 +485,7 @@ If Not (db Is Nothing) Then
             End If
         Next i
     End If
+    Log queryCount & " Queries Exported"
     ExportDatabaseObjects = ExportDatabaseObjects & queryCount & " queries" & vbCrLf
     
 End If
@@ -515,7 +523,7 @@ If Not CheckAndBuildFolderGFn(tempPath) Then
     Exit Function
 End If
 resultStr = ExportDatabaseObjects(tempPath & "\")
-Debug.Print "Started File Comparisons at " & Now()
+Log "Started File Comparisons"
 Dim newFileList() As String
 Dim oldFileList() As String
 CreateFileList tempPath, newFileList
@@ -527,7 +535,7 @@ For Each oldFilename In oldFileList
         If (Dir(tempPath & "\" & oldFilename) = "") Then
             Set oldFile = FSO.GetFile(srcFolder & "\" & oldFilename)
             'If the 'new' file doesn't exist, the old one should be deleted.
-            Debug.Print " Removed!: [" & oldFilename & "]"
+            Log "File Removed!:  [" & oldFilename & "]"
             Kill oldFile.Path
         End If
     End If
@@ -543,14 +551,14 @@ For Each tempFilename In newFileList
             If FileIsChangedAndNewerGFn(tempFile, oldFile) Then
                 'Overwrite old with new
                 'Kill oldFile.Path
-                Debug.Print " Changed!: [" & tempFilename & "]"
+                Log "File Changed!:  [" & tempFilename & "]"
                 FSO.CopyFile tempFile.Path, oldFile.Path, True
             Else
-                Debug.Print "Unchanged: [" & tempFilename & "]"
+                Log "File Unchanged: [" & tempFilename & "]"
             End If
         Else
             'If the 'old' file doesn't exist, the new one should be added.
-            Debug.Print "     New!: [" & tempFilename & "]"
+            Log "File Added!:    [" & tempFilename & "]"
             FSO.CopyFile tempFile.Path, srcFolder & "\" & tempFile.Name, True
         End If
     End If
@@ -560,7 +568,7 @@ Next tempFilename
 Close 'In case the copying leaves any files open
 DeleteFolderIfThereGSb srcFolder & TempFolder
 
-Debug.Print "Comparisons complete at " & Now() & "!"
+Debug.Print "Comparisons complete!"
 ExportChangedItems = resultStr
 
 ExitProc:
@@ -829,6 +837,7 @@ End If
 If (Right(exportLocGbl, 1) <> "\") Then
     exportLocGbl = exportLocGbl & "\"
 End If
+Log "Exporting to " & exportLocGbl
 CheckAndBuildFolderGFn (exportLocGbl)
 
 ExportThisDataBase = False
@@ -892,6 +901,8 @@ If (Right(pathname, 1) <> "\") Then pathname = pathname & "\"
 scriptFilename = "Build_Script.vbs"
 scriptPathAndFilename = pathname & scriptFilename
 
+Log "Creating Build Script: " & scriptPathAndFilename
+
 Dim ScriptTblRS As DAO.Recordset
 Set ScriptTblRS = CodeDb.OpenRecordset("SELECT BuildScript FROM __ScriptTbl__", dbOpenSnapshot)
     If Not ScriptTblRS.EOF Then
@@ -927,6 +938,8 @@ Dim scriptPath As String
 Dim scriptFilename As String
 scriptPath = GetFSO.GetParentFolderName(scriptPathAndFilename)
 scriptFilename = GetFSO.GetFileName(scriptPathAndFilename)
+
+Log "Creating shortcut to build script " & scriptPath & "\MAKE.lnk"
 
 'DesktopPath = GetShell.SpecialFolders("Desktop")
 Set Link = GetShell.CreateShortcut(scriptPath & "\MAKE.lnk")

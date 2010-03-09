@@ -12,6 +12,8 @@ Dim Ref As Reference
 Dim refCount As Integer
 Dim Refs As DAO.Recordset
 
+Log "Taking stock of code library references"
+
 CodeDb.Execute "DELETE * FROM " & REFERENCES_TABLENAME
 
 Set Refs = CodeDb.OpenRecordset(REFERENCES_TABLENAME, dbOpenDynaset)

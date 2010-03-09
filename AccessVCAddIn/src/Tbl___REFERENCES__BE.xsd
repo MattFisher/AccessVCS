@@ -19,7 +19,7 @@
 <xsd:element name="Ref_Name" minOccurs="0" od:jetType="text" od:sqlSType="nvarchar">
 <xsd:simpleType>
 <xsd:restriction base="xsd:string">
-<xsd:maxLength value="64"/>
+<xsd:maxLength value="255"/>
 </xsd:restriction>
 </xsd:simpleType>
 </xsd:element>

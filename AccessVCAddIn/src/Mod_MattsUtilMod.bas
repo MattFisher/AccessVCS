@@ -116,6 +116,7 @@ Public Sub DeleteFolderIfThereGSb(aFolder As String)
 'Be careful when using this - it doesn't care if there is anything in the folder,
 'It just kills it.
 If GetFSO.FolderExists(aFolder) Then
+    Log "Deleting folder: " & aFolder
     GetFSO.DeleteFolder (aFolder)
 End If
 End Sub
@@ -127,11 +128,14 @@ If (aFolder = "") Then
     CheckAndBuildFolderGFn = False
     Exit Function
 Else
+    Log "Checking for folder: " & aFolder
     If (Dir(aFolder, vbDirectory) <> "") Then
+        Log "Folder exists: " & aFolder
         CheckAndBuildFolderGFn = True
         Exit Function
     Else
         If (CheckAndBuildFolderGFn(GetFSO.GetParentFolderName(aFolder))) Then
+            Log "Creating folder: " & aFolder
             MkDir aFolder
             CheckAndBuildFolderGFn = True
         End If
@@ -177,9 +181,9 @@ Else
     ' Same size, different timestamps. Bugger.
     ' Open both files for binary access.
     oldFileNumber = FreeFile
-    Open oldFile.path For Binary Access Read As #oldFileNumber
+    Open oldFile.Path For Binary Access Read As #oldFileNumber
     newFileNumber = FreeFile
-    Open newFile.path For Binary Access Read As #newFileNumber
+    Open newFile.Path For Binary Access Read As #newFileNumber
     StPos = 1
     ' Read both files a chunk at a time using the Get statement.
     While oldFileChunk = newFileChunk _
